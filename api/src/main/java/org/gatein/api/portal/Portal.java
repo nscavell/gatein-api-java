@@ -23,8 +23,6 @@
 
 package org.gatein.api.portal;
 
-import org.gatein.api.content.ContentRegistry;
-import org.gatein.api.id.Id;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
@@ -33,8 +31,9 @@ import org.gatein.api.id.Id;
 public interface Portal extends Site
 {
 
-   // Not sure it should be here since we add application on other kind of sites (group / dashboard)
-   // perhaps we should move for now on GateIn and later provide a version on Site
-   ContentRegistry getContentRegistry();
+   // TODO: get/set Locale
+   // TODO: get/set Theme
+   // TODO: get/set keepSessionAlive?
+   // TODO: get/set showInfoBarByDefault(boolean)?
 
 }

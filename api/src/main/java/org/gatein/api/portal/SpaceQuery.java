@@ -1,9 +1,8 @@
 /*
- * JBoss, a division of Red Hat
- * Copyright 2011, Red Hat Middleware, LLC, and individual
- * contributors as indicated by the @authors tag. See the
- * copyright.txt in the distribution for a full listing of
- * individual contributors.
+ * JBoss, Home of Professional Open Source.
+ * Copyright 2012, Red Hat, Inc., and individual contributors
+ * as indicated by the @author tags. See the copyright.txt file in the
+ * distribution for a full listing of individual contributors.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -20,38 +19,51 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-
 package org.gatein.api.portal;
 
+import org.exoplatform.services.organization.Group;
 
 import java.util.List;
 
 /**
- * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
- * @version $Revision$
+ * Template
+ *
+ * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface Page
+public interface SpaceQuery
 {
-   String getId();
 
-   PageType getType();
+   SpaceQuery reset();
 
-   void setType(PageType name);
+   SpaceQuery immutable();
 
-   Site getSite();
+   List<Space> executeQuery();
+
+
+   // Conditions
+
+   SpaceQuery setName(String name);
 
    String getName();
 
-   String getTitle();
+   SpaceQuery setId(String id);
 
-   void setTitle(String title);
+   String getId();
 
-   //TODO: ??
-   List<Navigation> getNavigations();
+   DashboardQuery setOwner(String groupId);
 
-   //TODO: set/get showMaxWindow?
+   DashboardQuery setOwner(Group group);
 
-   //TODO: Attributes
+   String getOwner();
+
+
+   //
+
+   SpaceQuery sortByName(boolean ascending);
+
+   void setRange(Range range);
+
+   Range getRange();
 
 
 }

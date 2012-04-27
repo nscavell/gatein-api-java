@@ -23,122 +23,35 @@
 
 package org.gatein.api.portal;
 
-import org.gatein.api.id.BaseId;
-import org.gatein.api.id.Identifiable;
+import org.gatein.api.GateIn;
 import org.gatein.api.util.Type;
 
-import java.io.IOException;
-import java.util.Map;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @version $Revision$
  */
-public interface Site extends Identifiable<Site>
+public interface Site
 {
 
-   Id getId();
+   String getId();
 
-   Page getPage(String pageName);
+   String getName();
 
-   Navigation getNavigation();
+   String getDisplayName();
 
-   Type<Site> getType();
+   void setDisplayName(String displayName);
+
+   String getDescription();
+
+   void setDescription(String description);
 
    int getPriority();
 
-   public static final String PORTAL_TYPE_NAME = "portal";
-   public static final String DASHBOARD_TYPE_NAME = "user";
-   public static final String GROUP_TYPE_NAME = "group";
-   public static final Type<Site> PORTAL = new Type<Site>(PORTAL_TYPE_NAME)
-   {
-   };
-   public static final Type<Site> DASHBOARD = new Type<Site>(DASHBOARD_TYPE_NAME)
-   {
-   };
-   public static final Type<Site> GROUP = new Type<Site>(GROUP_TYPE_NAME)
-   {
-   };
+   void setPriority(int priority);
 
-   final class Id extends BaseId<Site>
-   {
+   Navigation getRootNavigation();
 
-      public static Id create(Type<Site> type, String name)
-      {
-         return new Id(type, name);
-      }
+   //TODO: Attributes
 
-      public static Id createPortal(String name)
-      {
-         return create(PORTAL, name);
-      }
-
-      public static Id createGroup(String name)
-      {
-         return create(GROUP, name);
-      }
-
-      public static Id createDashboard(String name)
-      {
-         return create(DASHBOARD, name);
-      }
-
-      /** . */
-      private final Type<Site> type;
-
-      /** . */
-      private final String name;
-
-      private Id(Type<Site> type, String name)
-      {
-         if (type == null)
-         {
-            throw new NullPointerException();
-         }
-         if (name == null)
-         {
-            throw new NullPointerException();
-         }
-
-         //
-         this.type = type;
-         this.name = name;
-      }
-
-      public Type<Site> getType()
-      {
-         return type;
-      }
-
-      public String getName()
-      {
-         return name;
-      }
-
-      @Override
-      public boolean equals(Object obj)
-      {
-         if (obj == this)
-         {
-            return true;
-         }
-         if (obj instanceof Id)
-         {
-            Id that = (Id)obj;
-            return type.equals(that.type) && name.equals(that.name);
-         }
-         return false;
-      }
-
-      @Override
-      public int hashCode()
-      {
-         return type.hashCode() & name.hashCode();
-      }
-
-      public Class<Site> getIdentifiableType()
-      {
-         return Site.class;
-      }
-   }
 }

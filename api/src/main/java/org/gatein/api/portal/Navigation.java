@@ -23,65 +23,64 @@
 
 package org.gatein.api.portal;
 
-import org.gatein.api.id.BaseId;
-import org.gatein.api.id.Identifiable;
+import org.gatein.api.GateIn;
 
 import java.net.URI;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @version $Revision$
  */
-public interface Navigation extends Identifiable<Navigation>
+public interface Navigation
 {
+   String getId();
 
-   Id getId();
+   String getName();
+
+   String getDisplayName();
+
+   void setDisplayName(String displayName);
+
+   //TODO: extended label? [language/label]
+   //TODO: publication date/time? [start/end]
+   //TODO: Icon?
+
+   boolean isVisible();
+
+   void setVisible(boolean visible);
 
    Page getTargetPage();
 
    void setTargetPage(Page target);
 
-   void setTargetPageRef(Page.Id targetId);
+   void setTargetPage(String targetId);
 
    URI getURI();
 
    Site getSite();
 
+   Navigation getParent();
+
+   int getIndex();
+
    Navigation getChild(String name);
 
-   Collection<? extends Navigation> getChildren();
+   List<Navigation> getChildren();
 
-   class Id extends BaseId<Navigation>
-   {
+   int getChildrenCount();
 
-      /** . */
-      private final String value;
+   List<Navigation> getChildren(Range range);
 
-      public Id(String value)
-      {
-         if (value == null)
-         {
-            throw new NullPointerException();
-         }
-         this.value = value;
-      }
+   void removeChild(String name);
 
-      public Class<Navigation> getIdentifiableType()
-      {
-         return Navigation.class;
-      }
+   Navigation addChild(String name);
 
-      @Override
-      public boolean equals(Object obj)
-      {
-         return obj == this || (obj instanceof Id && value.equals(((Id)obj).value));
-      }
 
-      @Override
-      public int hashCode()
-      {
-         return value.hashCode();
-      }
-   }
+
+   //TODO: move up/down?
+
+   //TODO: Attributes
+
+
 }

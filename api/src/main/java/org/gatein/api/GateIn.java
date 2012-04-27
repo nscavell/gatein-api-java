@@ -23,21 +23,22 @@
 
 package org.gatein.api;
 
-import org.gatein.api.content.Category;
-import org.gatein.api.content.Content;
-import org.gatein.api.content.Gadget;
-import org.gatein.api.content.ManagedContent;
-import org.gatein.api.content.Portlet;
-import org.gatein.api.content.WSRP;
-import org.gatein.api.id.Id;
-import org.gatein.api.id.Identifiable;
+
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.User;
+import org.gatein.api.portal.Dashboard;
+import org.gatein.api.portal.DashboardQuery;
 import org.gatein.api.portal.Page;
 import org.gatein.api.portal.Portal;
+import org.gatein.api.portal.PortalQuery;
+import org.gatein.api.portal.Range;
 import org.gatein.api.portal.Site;
-import org.gatein.api.util.IterableIdentifiableCollection;
+import org.gatein.api.portal.SpaceQuery;
+import org.gatein.api.portal.Space;
 import org.gatein.api.util.Type;
 
 import java.net.URI;
+import java.util.List;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
@@ -47,69 +48,92 @@ public interface GateIn
 {
    String GATEIN_API = "org.gatein.api.instance";
 
-   IterableIdentifiableCollection<Site> getPortals();
 
-   Portal getPortal(Site.Id portalId);
+   //
+   List<Site> getSites();
+
+   List<Site> getSites(Range range);
+
+   Site getSite(String siteId);
+
+   void removeSite(Site site);
+
+   void removeSite(String siteId);
+
+
+   //
+   List<Portal> getPortals();
+
+   List<Portal> getPortals(Range range);
+
+   Portal getPortal(String portalId);
 
    Portal getDefaultPortal();
 
-   IterableIdentifiableCollection<Site> getSites();
+   PortalQuery createPortalQuery();
 
-   IterableIdentifiableCollection<Site> getGroupSites();
+   Portal addPortal(String name);
 
-   Site getGroupSite(String... groupName);
 
-   IterableIdentifiableCollection<Site> getGroupSites(String userId);
+   //
+   List<Space> getSpaces();
 
-   IterableIdentifiableCollection<Site> getPortalSites(String userId);
+   List<Space> getSpaces(Range range);
 
-   Site getDashboard(String userId);
+   Space getSpaceByGroupId(String groupId);
 
-   <T extends Identifiable<T>> T get(Id<T> id);
+   Space getSpaceByGroup(Group group);
 
-   Site getSite(Site.Id siteId);
+   Space getSpace(String spaceId);
 
-   Portlet.Id portletId(String application, String portlet);
+   SpaceQuery createSpaceQuery();
 
-   WSRP.Id wsrpPortletId(String invoker, String portlet);
+   Space createSpace(String name, String groupId);
 
-   Gadget.Id gadgetId(String gadgetName);
 
-   Gadget.Id gadgetId(URI uri);
+   //
+   List<Dashboard> getDashboards();
 
-   Category.Id categoryId(String name);
+   List<Dashboard> getDashboards(Range range);
 
-   Page.Id pageId(Site.Id ownerSite, String pageName);
+   Dashboard getDashboardByUser(String userId);
 
-   ManagedContent.Id managedContentId(Category.Id categoryId, String name, Content.Id contentId);
+   Dashboard getDashboardByUser(User user);
+
+   Dashboard getDashboardById(String spaceId);
+
+   DashboardQuery createDashboardQuery();
+
+
+
 
    <T> T getProperty(Type<T> property);
 
    <T> void setProperty(Type<T> property, T value);
 
-   String LIFECYCLEMANAGER_TYPE_NAME = "org.gatein.api.lifecyclemanager";
-   Type<LifecycleManager> LIFECYCLE_MANAGER = new Type<LifecycleManager>(LIFECYCLEMANAGER_TYPE_NAME)
-   {
-   };
-
-   LifecycleManager NO_OP_MANAGER = new LifecycleManager()
-   {
-      public void begin()
-      {
-         // do nothing
-      }
-
-      public void end()
-      {
-         // do nothing
-      }
-   };
-
-   public interface LifecycleManager
-   {
-      void begin();
-
-      void end();
-   }
+//   String LIFECYCLEMANAGER_TYPE_NAME = "org.gatein.api.lifecyclemanager";
+//   Type<LifecycleManager> LIFECYCLE_MANAGER = new Type<LifecycleManager>(LIFECYCLEMANAGER_TYPE_NAME)
+//   {
+//   };
+//
+//   LifecycleManager NO_OP_MANAGER = new LifecycleManager()
+//   {
+//      public void begin()
+//      {
+//         // do nothing
+//      }
+//
+//      public void end()
+//      {
+//         // do nothing
+//      }
+//   };
+//
+//   public interface LifecycleManager
+//   {
+//      void begin();
+//
+//      void end();
+//   }
 
 }
