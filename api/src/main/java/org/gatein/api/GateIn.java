@@ -112,8 +112,6 @@ public interface GateIn
 
    <T> void setProperty(PropertyType<T> property, T value);
 
-   List<PropertyType> getProperties();
-
 
    //
    String LIFECYCLEMANAGER_TYPE_NAME = "org.gatein.api.lifecyclemanager";

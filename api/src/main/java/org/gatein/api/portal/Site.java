@@ -60,6 +60,5 @@ public interface Site
 
    <T> void setProperty(PropertyType<T> property, T value);
 
-   List<PropertyType> getProperties();
 
 }

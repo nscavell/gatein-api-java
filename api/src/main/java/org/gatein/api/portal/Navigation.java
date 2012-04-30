@@ -101,7 +101,5 @@ public interface Navigation
 
    <T> void setProperty(PropertyType<T> property, T value);
 
-   List<PropertyType> getProperties();
-
 
 }
