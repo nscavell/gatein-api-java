@@ -23,25 +23,20 @@
 
 package org.gatein.api;
 
-
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.User;
 import org.gatein.api.portal.Dashboard;
-import org.gatein.api.portal.DashboardQuery;
-import org.gatein.api.portal.Page;
+import org.gatein.api.portal.Navigation;
+import org.gatein.api.portal.SiteQuery;
 import org.gatein.api.portal.Portal;
-import org.gatein.api.portal.PortalQuery;
-import org.gatein.api.portal.Range;
+import org.gatein.api.commons.Range;
 import org.gatein.api.portal.Site;
-import org.gatein.api.portal.SpaceQuery;
 import org.gatein.api.portal.Space;
-import org.gatein.api.util.Type;
+import org.gatein.api.commons.PropertyType;
 
-import java.net.URI;
 import java.util.List;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
+ * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  * @version $Revision$
  */
 public interface GateIn
@@ -54,11 +49,12 @@ public interface GateIn
 
    List<Site> getSites(Range range);
 
+   SiteQuery<Site> createSiteQuery();
+
    Site getSite(String siteId);
 
-   void removeSite(Site site);
-
    void removeSite(String siteId);
+
 
 
    //
@@ -70,7 +66,7 @@ public interface GateIn
 
    Portal getDefaultPortal();
 
-   PortalQuery createPortalQuery();
+   SiteQuery<Portal> createPortalQuery();
 
    Portal addPortal(String name);
 
@@ -80,15 +76,13 @@ public interface GateIn
 
    List<Space> getSpaces(Range range);
 
-   Space getSpaceByGroupId(String groupId);
-
-   Space getSpaceByGroup(Group group);
+   Space getSpaceByGroup(String groupId);
 
    Space getSpace(String spaceId);
 
-   SpaceQuery createSpaceQuery();
+   SiteQuery<Space> createSpaceQuery();
 
-   Space createSpace(String name, String groupId);
+   Space addSpace(String name, String groupId);
 
 
    //
@@ -98,42 +92,52 @@ public interface GateIn
 
    Dashboard getDashboardByUser(String userId);
 
-   Dashboard getDashboardByUser(User user);
-
    Dashboard getDashboardById(String spaceId);
 
-   DashboardQuery createDashboardQuery();
+   SiteQuery<Dashboard> createDashboardQuery();
+
+
+   //
+   Navigation getNavigation(String navigationId);
+
+   Navigation getNavigation(String... path);
 
 
 
+   //
 
-   <T> T getProperty(Type<T> property);
+   <T> T getProperty(PropertyType<T> property);
 
-   <T> void setProperty(Type<T> property, T value);
+   <T> void setProperty(PropertyType<T> property, T value);
 
-//   String LIFECYCLEMANAGER_TYPE_NAME = "org.gatein.api.lifecyclemanager";
-//   Type<LifecycleManager> LIFECYCLE_MANAGER = new Type<LifecycleManager>(LIFECYCLEMANAGER_TYPE_NAME)
-//   {
-//   };
-//
-//   LifecycleManager NO_OP_MANAGER = new LifecycleManager()
-//   {
-//      public void begin()
-//      {
-//         // do nothing
-//      }
-//
-//      public void end()
-//      {
-//         // do nothing
-//      }
-//   };
-//
-//   public interface LifecycleManager
-//   {
-//      void begin();
-//
-//      void end();
-//   }
+   List<PropertyType> getProperties();
+
+
+   //
+   String LIFECYCLEMANAGER_TYPE_NAME = "org.gatein.api.lifecyclemanager";
+
+   PropertyType<LifecycleManager> LIFECYCLE_MANAGER = new PropertyType<LifecycleManager>(LIFECYCLEMANAGER_TYPE_NAME)
+   {
+   };
+
+   LifecycleManager NO_OP_MANAGER = new LifecycleManager()
+   {
+      public void begin()
+      {
+         // do nothing
+      }
+
+      public void end()
+      {
+         // do nothing
+      }
+   };
+
+   public interface LifecycleManager
+   {
+      void begin();
+
+      void end();
+   }
 
 }

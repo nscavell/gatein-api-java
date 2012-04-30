@@ -19,52 +19,65 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.api.portal;
-
-
-import org.exoplatform.services.organization.User;
-
-import java.util.List;
+package org.gatein.api.commons;
 
 /**
- * Template
+ * Represent range in paginated query
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface DashboardQuery
+public class Range
 {
+   //TODO: Just a quick impl
 
-   DashboardQuery reset();
+   private int offset;
+   
+   private int limit = -1;
 
-   DashboardQuery immutable();
+   private Range() {}
 
-   List<Dashboard> executeQuery();
+   private Range(int offset, int limit)
+   {
+      this.offset = offset;
+      this.limit = limit;
+   }
 
+   int getPage()
+   {
+      //TODO: Calculate current page based on limit/offset.
+      //TODO: Should it start from 0 or 1? Rather 1?....
+      return 1;
+   }
 
-   // Conditions
+   public int getOffset()
+   {
+      return offset;
+   }
 
-   DashboardQuery setName(String name);
+   public int getLimit()
+   {
+      return limit;
+   }
 
-   String getName();
+   public Range of(int offset, int limit)
+   {
+      return new Range(offset, limit);
+   }
+   
+   public Range next()
+   {
+      offset += limit;
+      return this;
+   }
 
-   DashboardQuery setId(String id);
-
-   String getId();
-
-   DashboardQuery setOwner(String userId);
-
-   DashboardQuery setOwner(User user);
-
-   String getOwner();
-
-
-   //
-
-   DashboardQuery sortByName(boolean ascending);
-
-   void setRange(Range range);
-
-   Range getRange();
-
+   public Range previous()
+   {
+      offset -= limit;
+      if(offset < 0)
+      {
+         offset = 0;
+      }
+      return this;
+   }
 
 }

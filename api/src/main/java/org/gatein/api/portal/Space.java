@@ -21,18 +21,15 @@
  */
 package org.gatein.api.portal;
 
-import org.exoplatform.services.organization.Group;
 
 /**
- * Template
+ * Represent Site related to specific group
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
 public interface Space extends Site
 {
 
-   String getOwnerId();
-
-   Group getOwner();
+   String getGroupId();
 
 }

@@ -19,9 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.api.portal;
-
-import org.exoplatform.services.organization.Group;
+package org.gatein.api.commons;
 
 import java.util.List;
 
@@ -30,40 +28,29 @@ import java.util.List;
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface SpaceQuery
+public interface Query<T>
 {
+   Query<T> reset();
 
-   SpaceQuery reset();
+   Query<T> immutable();
 
-   SpaceQuery immutable();
+   Query<T> clone();
 
-   List<Space> executeQuery();
+   List<T> execute();
 
+   int resultsCount();
 
-   // Conditions
+   Query<T> sort(boolean ascending);
 
-   SpaceQuery setName(String name);
-
-   String getName();
-
-   SpaceQuery setId(String id);
-
-   String getId();
-
-   DashboardQuery setOwner(String groupId);
-
-   DashboardQuery setOwner(Group group);
-
-   String getOwner();
-
-
-   //
-
-   SpaceQuery sortByName(boolean ascending);
-
-   void setRange(Range range);
+   Query<T> setRange(Range range);
 
    Range getRange();
 
+   Query<T> nextPage();
 
+   Query<T> previousPage();
+
+   Query<T> firstPage();
+
+   Query<T> lastPage();
 }

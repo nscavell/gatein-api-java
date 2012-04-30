@@ -21,53 +21,50 @@
  */
 package org.gatein.api.portal;
 
+
+import org.gatein.api.commons.Query;
+import org.gatein.api.commons.Range;
+
+import java.util.List;
+
 /**
- * Represent range in paginated query
+ * Template
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public class Range
+public interface SiteQuery<T extends Site> extends Query
 {
-   //TODO: Just a quick impl
-   
-   private int offset;
-   
-   private int limit = -1;
 
-   private Range() {}
+   //TODO: sortByProperty? Property value conditions?
 
-   private Range(int offset, int limit)
-   {
-      this.offset = offset;
-      this.limit = limit;
-   }
+   // Conditions
 
-   int getPage()
-   {
-      //TODO: Calculate based on limit/offset.
-      //TODO: Should it start from 0 or 1? Rather 1....
-      return 1;
-   }
+   SiteQuery setName(String name);
 
-   public int getOffset()
-   {
-      return offset;
-   }
+   String getName();
 
-   public int getLimit()
-   {
-      return limit;
-   }
 
-   public Range of(int offset, int limit)
-   {
-      return new Range(offset, limit);
-   }
-   
-   public Range next()
-   {
-      offset += limit;
-      return this;
-   }
+   SiteQuery<T> reset();
+
+   SiteQuery<T> immutable();
+
+   SiteQuery<T> clone();
+
+   int resultsCount();
+
+   SiteQuery<T> sort(boolean ascending);
+
+   SiteQuery<T> setRange(Range range);
+
+   Range getRange();
+
+   SiteQuery<T> nextPage();
+
+   SiteQuery<T> previousPage();
+
+   SiteQuery<T> firstPage();
+
+   SiteQuery<T> lastPage();
+
 
 }

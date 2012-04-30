@@ -23,17 +23,35 @@
 
 package org.gatein.api.portal;
 
-import org.gatein.api.GateIn;
+import org.gatein.api.commons.PropertyType;
+import org.gatein.api.commons.Range;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
+ * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  * @version $Revision$
  */
 public interface Navigation
 {
+
+   //TODO: extended label? [language/label]
+   //TODO: publication date/time? [start/end]
+   //TODO: Icon?
+   //TODO: Localized description and displayName
+
+   String PUBLICATION_DATE_START_NAME = "org.gatein.api.portal.navigation.publication_date_start";
+
+   PropertyType<Date> PUBLICATION_DATE_START = new PropertyType<Date>(PUBLICATION_DATE_START_NAME){};
+
+   String PUBLICATION_DATE_END_NAME = "org.gatein.api.portal.navigation.publication_date_end";
+
+   PropertyType<Date> PUBLICATION_END_START = new PropertyType<Date>(PUBLICATION_DATE_END_NAME){};
+
+
    String getId();
 
    String getName();
@@ -41,10 +59,6 @@ public interface Navigation
    String getDisplayName();
 
    void setDisplayName(String displayName);
-
-   //TODO: extended label? [language/label]
-   //TODO: publication date/time? [start/end]
-   //TODO: Icon?
 
    boolean isVisible();
 
@@ -76,11 +90,18 @@ public interface Navigation
 
    Navigation addChild(String name);
 
+   void moveUp();
 
+   void moveDown();
 
-   //TODO: move up/down?
 
    //TODO: Attributes
+
+   <T> T getProperty(PropertyType<T> property);
+
+   <T> void setProperty(PropertyType<T> property, T value);
+
+   List<PropertyType> getProperties();
 
 
 }

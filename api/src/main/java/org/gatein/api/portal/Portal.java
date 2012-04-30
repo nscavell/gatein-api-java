@@ -26,6 +26,7 @@ package org.gatein.api.portal;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
+ * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  * @version $Revision$
  */
 public interface Portal extends Site

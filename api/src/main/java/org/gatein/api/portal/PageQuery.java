@@ -21,6 +21,9 @@
  */
 package org.gatein.api.portal;
 
+import org.gatein.api.commons.Query;
+import org.gatein.api.commons.Range;
+
 import java.util.List;
 
 /**
@@ -28,14 +31,9 @@ import java.util.List;
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface PageQuery
+public interface PageQuery extends Query<Page>
 {
-   PageQuery reset();
-
-   PageQuery immutable();
-
-   List<Page> executeQuery();
-
+   //TODO: sortByProperty? Property value conditions?
 
    // Conditions
 
@@ -43,9 +41,13 @@ public interface PageQuery
 
    String getName();
 
-   PageQuery setId(String id);
+   PageQuery setId(String name);
 
    String getId();
+
+   PageQuery setTitle(String title);
+
+   String getTitle();
 
    PageQuery setPageType(PageType pageType);
 
@@ -53,16 +55,31 @@ public interface PageQuery
 
    PageQuery setNavigation(Navigation navigation);
 
-   PageQuery setNavigation(String navigationId);
+   Navigation getNavigation();
 
 
+   // Query
 
-   //
+   PageQuery reset();
 
-   PageQuery sortByName(boolean ascending);
+   PageQuery immutable();
 
-   void setRange(Range range);
+   PageQuery clone();
+
+   int resultsCount();
+
+   PageQuery sort(boolean ascending);
+
+   PageQuery setRange(Range range);
 
    Range getRange();
+
+   PageQuery nextPage();
+
+   PageQuery previousPage();
+
+   PageQuery firstPage();
+
+   PageQuery lastPage();
 
 }

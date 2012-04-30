@@ -21,7 +21,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.gatein.api.util;
+package org.gatein.api.commons;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -29,13 +29,13 @@ import java.lang.reflect.ParameterizedType;
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @version $Revision$
  */
-public abstract class Type<T>
+public abstract class PropertyType<T>
 {
    private final String name;
    private final Class<T> valueType;
 
    @SuppressWarnings("unchecked")
-   public Type(String name)
+   public PropertyType(String name)
    {
       this.name = name;
       final java.lang.reflect.Type genericSuperclass = getClass().getGenericSuperclass();

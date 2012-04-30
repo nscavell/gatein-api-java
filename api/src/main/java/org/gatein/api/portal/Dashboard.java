@@ -21,8 +21,6 @@
  */
 package org.gatein.api.portal;
 
-import org.exoplatform.services.organization.User;
-
 /**
  * Template
  *
@@ -31,8 +29,6 @@ import org.exoplatform.services.organization.User;
 public interface Dashboard extends Site
 {
 
-   String getOwnerId();
-
-   User getOwner();
+   String getUserId();
 
 }

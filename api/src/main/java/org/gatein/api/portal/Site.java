@@ -23,12 +23,14 @@
 
 package org.gatein.api.portal;
 
-import org.gatein.api.GateIn;
-import org.gatein.api.util.Type;
 
+import org.gatein.api.commons.PropertyType;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
+ * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  * @version $Revision$
  */
 public interface Site
@@ -53,5 +55,11 @@ public interface Site
    Navigation getRootNavigation();
 
    //TODO: Attributes
+
+   <T> T getProperty(PropertyType<T> property);
+
+   <T> void setProperty(PropertyType<T> property, T value);
+
+   List<PropertyType> getProperties();
 
 }
