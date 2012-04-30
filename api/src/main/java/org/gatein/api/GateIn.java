@@ -78,6 +78,8 @@ public interface GateIn
 
    Space getSpaceByGroup(String groupId);
 
+   Space getSpaceByGroup(String... groupId);
+
    Space getSpace(String spaceId);
 
    SiteQuery<Space> createSpaceQuery();
