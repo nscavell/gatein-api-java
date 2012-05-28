@@ -1,8 +1,9 @@
 /*
- * JBoss, Home of Professional Open Source.
- * Copyright 2012, Red Hat, Inc., and individual contributors
- * as indicated by the @author tags. See the copyright.txt file in the
- * distribution for a full listing of individual contributors.
+ * JBoss, a division of Red Hat
+ * Copyright 2011, Red Hat Middleware, LLC, and individual
+ * contributors as indicated by the @authors tag. See the
+ * copyright.txt in the distribution for a full listing of
+ * individual contributors.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -19,52 +20,45 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
+
 package org.gatein.api.portal;
 
 
-import org.gatein.api.commons.Query;
-import org.gatein.api.commons.Range;
+import org.gatein.api.commons.PropertyType;
 
 import java.util.List;
 
 /**
- * Template
- *
+ * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
+ * @version $Revision$
  */
-public interface SiteQuery<T extends Site> extends Query
+public interface PortalObject
 {
 
-   //TODO: sortByProperty? Property value conditions?
+   String getId();
 
-   // Conditions
+   String getDisplayName();
 
-   SiteQuery setName(String name);
+   void setDisplayName(String displayName);
 
-   String getName();
+   String getDescription();
 
+   void setDescription(String description);
 
-   SiteQuery<T> reset();
+   int getPriority();
 
-   SiteQuery<T> immutable();
+   void setPriority(int priority);
 
-   SiteQuery<T> clone();
+   Navigation getRootNavigation();
 
-   int resultsCount();
+   Page getPage(String pageName);
 
-   SiteQuery<T> sort(boolean ascending);
+   //TODO: Attributes
 
-   SiteQuery<T> setRange(Range range);
+   <T> T getProperty(PropertyType<T> property);
 
-   Range getRange();
-
-   SiteQuery<T> nextPage();
-
-   SiteQuery<T> previousPage();
-
-   SiteQuery<T> firstPage();
-
-   SiteQuery<T> lastPage();
+   <T> void setProperty(PropertyType<T> property, T value);
 
 
 }

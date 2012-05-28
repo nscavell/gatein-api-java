@@ -26,7 +26,7 @@ package org.gatein.api.portal;
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface Dashboard extends Site
+public interface Dashboard extends PortalObject
 {
 
    String getUserId();

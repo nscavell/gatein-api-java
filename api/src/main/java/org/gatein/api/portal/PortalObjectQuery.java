@@ -1,9 +1,8 @@
 /*
- * JBoss, a division of Red Hat
- * Copyright 2011, Red Hat Middleware, LLC, and individual
- * contributors as indicated by the @authors tag. See the
- * copyright.txt in the distribution for a full listing of
- * individual contributors.
+ * JBoss, Home of Professional Open Source.
+ * Copyright 2012, Red Hat, Inc., and individual contributors
+ * as indicated by the @author tags. See the copyright.txt file in the
+ * distribution for a full listing of individual contributors.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -20,46 +19,50 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-
 package org.gatein.api.portal;
 
 
-import org.gatein.api.commons.PropertyType;
-
-import java.util.List;
+import org.gatein.api.commons.Query;
+import org.gatein.api.commons.Range;
 
 /**
- * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
+ * Template
+ *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
- * @version $Revision$
  */
-public interface Page
+public interface PortalObjectQuery<T extends PortalObject> extends Query
 {
-   String getId();
 
-   PageType getType();
+   //TODO: sortByProperty? Property value conditions?
 
-   void setType(PageType name);
+   // Conditions
 
-   PortalObject getPortalObject();
+   PortalObjectQuery setName(String name);
 
    String getName();
 
-   String getTitle();
 
-   void setTitle(String title);
+   PortalObjectQuery<T> reset();
 
-   //TODO: ??
-   List<Navigation> getNavigations();
+   PortalObjectQuery<T> immutable();
 
-   //TODO: set/get showMaxWindow?
+   PortalObjectQuery<T> clone();
 
-   //TODO: Attributes
+   int resultsCount();
 
-   <T> T getProperty(PropertyType<T> property);
+   PortalObjectQuery<T> sort(boolean ascending);
 
-   <T> void setProperty(PropertyType<T> property, T value);
+   PortalObjectQuery<T> setRange(Range range);
 
+   Range getRange();
+
+   PortalObjectQuery<T> nextPage();
+
+   PortalObjectQuery<T> previousPage();
+
+   PortalObjectQuery<T> firstPage();
+
+   PortalObjectQuery<T> lastPage();
 
 
 }

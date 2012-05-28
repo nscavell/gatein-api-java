@@ -72,7 +72,7 @@ public interface Navigation
 
    URI getURI();
 
-   Site getSite();
+   PortalObject getPortalObject();
 
    Navigation getParent();
 

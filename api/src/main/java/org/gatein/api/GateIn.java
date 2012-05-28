@@ -25,10 +25,10 @@ package org.gatein.api;
 
 import org.gatein.api.portal.Dashboard;
 import org.gatein.api.portal.Navigation;
-import org.gatein.api.portal.SiteQuery;
-import org.gatein.api.portal.Portal;
-import org.gatein.api.commons.Range;
+import org.gatein.api.portal.PortalObject;
+import org.gatein.api.portal.PortalObjectQuery;
 import org.gatein.api.portal.Site;
+import org.gatein.api.commons.Range;
 import org.gatein.api.portal.Space;
 import org.gatein.api.commons.PropertyType;
 
@@ -45,30 +45,32 @@ public interface GateIn
 
 
    //
-   List<Site> getSites();
+   List<PortalObject> getPortalObjects();
 
-   List<Site> getSites(Range range);
+   List<PortalObject> getPortalObjects(Range range);
 
-   SiteQuery<Site> createSiteQuery();
+   PortalObjectQuery<PortalObject> createPortalObjectQuery();
 
-   Site getSite(String siteId);
+   PortalObject getPortalObject(String poId);
 
-   void removeSite(String siteId);
+   void removePortalObject(String poId);
 
 
 
    //
-   List<Portal> getPortals();
+   List<Site> getSites();
 
-   List<Portal> getPortals(Range range);
+   List<Site> getSites(Range range);
 
-   Portal getPortal(String portalId);
+   Site getSite(String siteId);
 
-   Portal getDefaultPortal();
+   Site getSiteByName(String name);
 
-   SiteQuery<Portal> createPortalQuery();
+   Site getDefaultSite();
 
-   Portal addPortal(String name);
+   PortalObjectQuery<Site> createSiteQuery();
+
+   Site addSite(String name);
 
 
    //
@@ -82,7 +84,7 @@ public interface GateIn
 
    Space getSpace(String spaceId);
 
-   SiteQuery<Space> createSpaceQuery();
+   PortalObjectQuery<Space> createSpaceQuery();
 
    Space addSpace(String name, String groupId);
 
@@ -96,7 +98,7 @@ public interface GateIn
 
    Dashboard getDashboardById(String spaceId);
 
-   SiteQuery<Dashboard> createDashboardQuery();
+   PortalObjectQuery<Dashboard> createDashboardQuery();
 
 
    //

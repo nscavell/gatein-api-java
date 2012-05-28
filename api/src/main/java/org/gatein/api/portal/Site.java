@@ -24,41 +24,18 @@
 package org.gatein.api.portal;
 
 
-import org.gatein.api.commons.PropertyType;
-
-import java.util.List;
-
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  * @version $Revision$
  */
-public interface Site
+public interface Site extends PortalObject
 {
-
-   String getId();
-
    String getName();
 
-   String getDisplayName();
-
-   void setDisplayName(String displayName);
-
-   String getDescription();
-
-   void setDescription(String description);
-
-   int getPriority();
-
-   void setPriority(int priority);
-
-   Navigation getRootNavigation();
-
-   //TODO: Attributes
-
-   <T> T getProperty(PropertyType<T> property);
-
-   <T> void setProperty(PropertyType<T> property, T value);
-
+   // TODO: get/set Locale
+   // TODO: get/set Theme
+   // TODO: get/set keepSessionAlive?
+   // TODO: get/set showInfoBarByDefault(boolean)?
 
 }

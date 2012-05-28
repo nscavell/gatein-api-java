@@ -27,7 +27,7 @@ package org.gatein.api.portal;
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface Space extends Site
+public interface Space extends PortalObject
 {
 
    String getGroupId();
