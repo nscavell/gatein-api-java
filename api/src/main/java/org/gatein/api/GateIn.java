@@ -43,28 +43,12 @@ public interface GateIn
 {
    String GATEIN_API = "org.gatein.api.instance";
 
-
-   //
-   List<PortalObject> getPortalObjects();
-
-   List<PortalObject> getPortalObjects(Range range);
-
-   PortalObjectQuery<PortalObject> createPortalObjectQuery();
-
-   PortalObject getPortalObject(String poId);
-
-   void removePortalObject(String poId);
-
-
-
    //
    List<Site> getSites();
 
    List<Site> getSites(Range range);
 
    Site getSite(String siteId);
-
-   Site getSiteByName(String name);
 
    Site getDefaultSite();
 
@@ -78,9 +62,7 @@ public interface GateIn
 
    List<Space> getSpaces(Range range);
 
-   Space getSpaceByGroup(String groupId);
-
-   Space getSpaceByGroup(String... groupId);
+   Space getSpace(String... groupId);
 
    Space getSpace(String spaceId);
 
@@ -94,9 +76,7 @@ public interface GateIn
 
    List<Dashboard> getDashboards(Range range);
 
-   Dashboard getDashboardByUser(String userId);
-
-   Dashboard getDashboardById(String spaceId);
+   Dashboard getDashboard(String dashboardId);
 
    PortalObjectQuery<Dashboard> createDashboardQuery();
 

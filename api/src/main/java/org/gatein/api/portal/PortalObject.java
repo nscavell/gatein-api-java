@@ -38,6 +38,8 @@ public interface PortalObject
 
    String getId();
 
+   PortalObjectType getType();
+
    String getDisplayName();
 
    void setDisplayName(String displayName);
@@ -50,7 +52,7 @@ public interface PortalObject
 
    void setPriority(int priority);
 
-   Navigation getRootNavigation();
+   Navigation getNavigation();
 
    Page getPage(String pageName);
 

@@ -21,48 +21,12 @@
  */
 package org.gatein.api.portal;
 
-
-import org.gatein.api.commons.Query;
-import org.gatein.api.commons.Range;
-
 /**
  * Template
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface PortalObjectQuery<T extends PortalObject> extends Query
+public enum PortalObjectType
 {
-
-   //TODO: sortByProperty? Property value conditions?
-
-   // Conditions
-
-   PortalObjectQuery setId(String id);
-
-   String getId();
-
-
-   PortalObjectQuery<T> reset();
-
-   PortalObjectQuery<T> immutable();
-
-   PortalObjectQuery<T> clone();
-
-   int resultsCount();
-
-   PortalObjectQuery<T> sort(boolean ascending);
-
-   PortalObjectQuery<T> setRange(Range range);
-
-   Range getRange();
-
-   PortalObjectQuery<T> nextPage();
-
-   PortalObjectQuery<T> previousPage();
-
-   PortalObjectQuery<T> firstPage();
-
-   PortalObjectQuery<T> lastPage();
-
-
+   SITE, SPACE, DASHBOARD;
 }
