@@ -23,7 +23,6 @@
 
 package org.gatein.api;
 
-import org.gatein.api.portal.Navigation;
 import org.gatein.api.portal.Site;
 import org.gatein.api.portal.SiteQuery;
 import org.gatein.api.commons.Range;
@@ -49,7 +48,7 @@ public interface GateIn
 
    List<Site> getSites(Site.SiteType siteType, Range range);
 
-   Site getSite(Site.SiteId siteId);
+   Site getSite(Site.Id siteId);
 
    Site getDefaultSite();
 

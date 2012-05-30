@@ -37,9 +37,9 @@ public interface SiteQuery<T extends Site> extends Query
 
    // Conditions
 
-   SiteQuery<T> setId(Site.SiteId id);
+   SiteQuery<T> setId(Site.Id id);
 
-   Site.SiteId getId();
+   Site.Id getId();
 
    SiteQuery<T> setType(Site.SiteType siteType);
 

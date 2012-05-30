@@ -26,8 +26,6 @@ package org.gatein.api.portal;
 
 import org.gatein.api.commons.PropertyType;
 
-import java.util.List;
-
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
@@ -36,7 +34,7 @@ import java.util.List;
 public interface Site
 {
 
-   SiteId getId();
+   Id getId();
 
    String getDisplayName();
 
@@ -65,21 +63,21 @@ public interface Site
 
    <T> void setProperty(PropertyType<T> property, T value);
 
-   public class SiteId
+   public class Id
    {
       private SiteType siteType;
 
       private String name;
 
-      private SiteId(SiteType siteType, String name)
+      private Id(SiteType siteType, String name)
       {
          this.siteType = siteType;
          this.name = name;
       }
 
-      public static SiteId create(SiteType siteType, String name)
+      public static Id create(SiteType siteType, String name)
       {
-         return new SiteId(siteType, name);
+         return new Id(siteType, name);
       }
 
       public SiteType getSiteType()
