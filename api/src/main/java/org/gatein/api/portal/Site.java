@@ -24,18 +24,80 @@
 package org.gatein.api.portal;
 
 
+import org.gatein.api.commons.PropertyType;
+
+import java.util.List;
+
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  * @version $Revision$
  */
-public interface Site extends PortalObject
+public interface Site
 {
-   String getName();
 
-   // TODO: get/set Locale
-   // TODO: get/set Theme
-   // TODO: get/set keepSessionAlive?
-   // TODO: get/set showInfoBarByDefault(boolean)?
+   SiteId getId();
+
+   String getDisplayName();
+
+   void setDisplayName(String displayName);
+
+   String getDescription();
+
+   void setDescription(String description);
+
+   int getPriority();
+
+   void setPriority(int priority);
+
+   Navigation getNavigation();
+
+   Page getPage(String pageName);
+
+   //
+   Navigation getNavigation(String navigationId);
+
+   Navigation getNavigation(String... path);
+
+   //TODO: Attributes
+
+   <T> T getProperty(PropertyType<T> property);
+
+   <T> void setProperty(PropertyType<T> property, T value);
+
+   public class SiteId
+   {
+      private SiteType siteType;
+
+      private String name;
+
+      private SiteId(SiteType siteType, String name)
+      {
+         this.siteType = siteType;
+         this.name = name;
+      }
+
+      public static SiteId create(SiteType siteType, String name)
+      {
+         return new SiteId(siteType, name);
+      }
+
+      public SiteType getSiteType()
+      {
+         return siteType;
+      }
+
+      public String getName()
+      {
+         return name;
+      }
+
+
+   }
+
+   public static enum SiteType
+   {
+      PORTAL, GROUP, USER;
+   }
 
 }

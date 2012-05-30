@@ -22,14 +22,53 @@
 package org.gatein.api.portal;
 
 
+import org.gatein.api.commons.Query;
+import org.gatein.api.commons.Range;
+
 /**
- * Represent Site related to specific group
+ * Template
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface Space extends PortalObject
+public interface SiteQuery<T extends Site> extends Query
 {
 
-   String getGroupId();
+   //TODO: sortByProperty? Property value conditions?
+
+   // Conditions
+
+   SiteQuery<T> setId(Site.SiteId id);
+
+   Site.SiteId getId();
+
+   SiteQuery<T> setType(Site.SiteType siteType);
+
+   Site.SiteType getType();
+
+
+   // General
+
+   SiteQuery<T> reset();
+
+   SiteQuery<T> immutable();
+
+   SiteQuery<T> clone();
+
+   int resultsCount();
+
+   SiteQuery<T> sort(boolean ascending);
+
+   SiteQuery<T> setRange(Range range);
+
+   Range getRange();
+
+   SiteQuery<T> nextPage();
+
+   SiteQuery<T> previousPage();
+
+   SiteQuery<T> firstPage();
+
+   SiteQuery<T> lastPage();
+
 
 }

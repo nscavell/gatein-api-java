@@ -41,7 +41,7 @@ public interface Page
 
    void setType(PageType name);
 
-   PortalObject getPortalObject();
+   Site getPortalObject();
 
    String getName();
 

@@ -23,13 +23,10 @@
 
 package org.gatein.api;
 
-import org.gatein.api.portal.Dashboard;
 import org.gatein.api.portal.Navigation;
-import org.gatein.api.portal.PortalObject;
-import org.gatein.api.portal.PortalObjectQuery;
 import org.gatein.api.portal.Site;
+import org.gatein.api.portal.SiteQuery;
 import org.gatein.api.commons.Range;
-import org.gatein.api.portal.Space;
 import org.gatein.api.commons.PropertyType;
 
 import java.util.List;
@@ -48,45 +45,19 @@ public interface GateIn
 
    List<Site> getSites(Range range);
 
-   Site getSite(String siteId);
+   List<Site> getSites(Site.SiteType siteType);
+
+   List<Site> getSites(Site.SiteType siteType, Range range);
+
+   Site getSite(Site.SiteId siteId);
 
    Site getDefaultSite();
 
-   PortalObjectQuery<Site> createSiteQuery();
+   SiteQuery<Site> createSiteQuery();
 
-   Site addSite(String name);
+   Site addSite(Site.SiteType siteType, String name);
 
-
-   //
-   List<Space> getSpaces();
-
-   List<Space> getSpaces(Range range);
-
-   Space getSpace(String... groupId);
-
-   Space getSpace(String spaceId);
-
-   PortalObjectQuery<Space> createSpaceQuery();
-
-   Space addSpace(String name, String groupId);
-
-
-   //
-   List<Dashboard> getDashboards();
-
-   List<Dashboard> getDashboards(Range range);
-
-   Dashboard getDashboard(String dashboardId);
-
-   PortalObjectQuery<Dashboard> createDashboardQuery();
-
-
-   //
-   Navigation getNavigation(String navigationId);
-
-   Navigation getNavigation(String... path);
-
-
+   void removeSite(Site site);
 
    //
 
