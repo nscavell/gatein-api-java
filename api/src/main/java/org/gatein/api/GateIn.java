@@ -44,9 +44,9 @@ public interface GateIn
 
    List<Site> getSites(Range range);
 
-   List<Site> getSites(Site.SiteType siteType);
+   List<Site> getSites(Site.Type siteType);
 
-   List<Site> getSites(Site.SiteType siteType, Range range);
+   List<Site> getSites(Site.Type siteType, Range range);
 
    Site getSite(Site.Id siteId);
 
@@ -54,7 +54,7 @@ public interface GateIn
 
    SiteQuery<Site> createSiteQuery();
 
-   Site addSite(Site.SiteType siteType, String name);
+   Site addSite(Site.Type siteType, String name);
 
    void removeSite(Site site);
 

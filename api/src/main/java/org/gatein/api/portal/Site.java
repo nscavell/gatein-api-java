@@ -65,22 +65,22 @@ public interface Site
 
    public class Id
    {
-      private SiteType siteType;
+      private Type siteType;
 
       private String name;
 
-      private Id(SiteType siteType, String name)
+      private Id(Type siteType, String name)
       {
          this.siteType = siteType;
          this.name = name;
       }
 
-      public static Id create(SiteType siteType, String name)
+      public static Id create(Type siteType, String name)
       {
          return new Id(siteType, name);
       }
 
-      public SiteType getSiteType()
+      public Type getSiteType()
       {
          return siteType;
       }
@@ -93,7 +93,7 @@ public interface Site
 
    }
 
-   public static enum SiteType
+   public static enum Type
    {
       PORTAL, GROUP, USER;
    }

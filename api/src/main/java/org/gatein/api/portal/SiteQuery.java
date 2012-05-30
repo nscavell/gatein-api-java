@@ -41,9 +41,9 @@ public interface SiteQuery<T extends Site> extends Query
 
    Site.Id getId();
 
-   SiteQuery<T> setType(Site.SiteType siteType);
+   SiteQuery<T> setType(Site.Type siteType);
 
-   Site.SiteType getType();
+   Site.Type getType();
 
 
    // General
