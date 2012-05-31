@@ -80,6 +80,27 @@ public interface Site
          return new Id(type, name);
       }
 
+      public static Id site(String name)
+      {
+         return new Id(Type.SITE, name);
+      }
+
+      public static Id space(String... name)
+      {
+         StringBuilder groupId = new StringBuilder();
+         for (String s : name)
+         {
+            groupId.append("/")
+            .append(s);
+         }
+         return new Id(Type.SPACE, groupId.toString());
+      }
+
+      public static Id dashboard(String name)
+      {
+         return new Id(Type.DASHBOARD, name);
+      }
+
       public Type getType()
       {
          return type;

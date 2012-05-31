@@ -50,6 +50,8 @@ public interface GateIn
 
    Site getSite(Site.Id siteId);
 
+   Site getSite(Site.Type type, String name);
+
    Site getDefaultSite();
 
    SiteQuery<Site> createSiteQuery();
