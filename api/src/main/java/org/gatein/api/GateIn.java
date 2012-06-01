@@ -58,7 +58,9 @@ public interface GateIn
 
    Site addSite(Site.Type siteType, String name);
 
-   void removeSite(Site site);
+   void removeSite(Site.Id siteId);
+
+   void removeSite(Site.Type siteType, String name);
 
    //
 

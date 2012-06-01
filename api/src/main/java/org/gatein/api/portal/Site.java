@@ -26,6 +26,8 @@ package org.gatein.api.portal;
 
 import org.gatein.api.commons.PropertyType;
 
+import java.util.List;
+
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
@@ -48,11 +50,13 @@ public interface Site
 
    void setPriority(int priority);
 
-   Navigation getNavigation();
+   List<Page> getPages();
 
    Page getPage(String pageName);
 
    //
+   Navigation getNavigation();
+
    Navigation getNavigation(String navigationId);
 
    Navigation getNavigation(String... path);
