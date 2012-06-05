@@ -115,7 +115,11 @@ public interface Site
          return name;
       }
 
-
+      @Override
+      public String toString()
+      {
+         return "Site.Id[type="+type+", name="+name+"]";
+      }
    }
 
    public static enum Type
