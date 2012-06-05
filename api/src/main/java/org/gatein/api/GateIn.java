@@ -23,6 +23,7 @@
 
 package org.gatein.api;
 
+import org.gatein.api.exception.EntityNotFoundException;
 import org.gatein.api.portal.Site;
 import org.gatein.api.portal.SiteQuery;
 import org.gatein.api.commons.Range;
@@ -58,9 +59,9 @@ public interface GateIn
 
    Site addSite(Site.Type siteType, String name);
 
-   void removeSite(Site.Id siteId);
+   void removeSite(Site.Id siteId) throws EntityNotFoundException;
 
-   void removeSite(Site.Type siteType, String name);
+   void removeSite(Site.Type siteType, String name) throws EntityNotFoundException;
 
    //
 
