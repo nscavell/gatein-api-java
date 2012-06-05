@@ -45,6 +45,20 @@ public interface SiteQuery<T extends Site> extends Query
 
    Site.Type getType();
 
+   SiteQuery<T> setUserId(String userId);
+
+   String getUserId();
+
+   SiteQuery<T> setGroupId(String groupId);
+
+   SiteQuery<T> setGroupId(String... groupId);
+
+   String getGroupId();
+
+   SiteQuery<T> containNavigation(boolean option);
+
+   boolean isContainNavigation();
+
 
    // General
 
