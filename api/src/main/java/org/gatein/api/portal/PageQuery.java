@@ -49,10 +49,6 @@ public interface PageQuery extends Query<Page>
 
    String getTitle();
 
-   PageQuery setPageType(PageType pageType);
-
-   PageType getPageType();
-
    PageQuery setNavigation(Navigation navigation);
 
    Navigation getNavigation();

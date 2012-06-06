@@ -37,10 +37,6 @@ public interface Page
 {
    String getId();
 
-   PageType getType();
-
-   void setType(PageType name);
-
    Site getSite();
 
    String getName();
