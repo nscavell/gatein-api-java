@@ -19,61 +19,29 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.api.portal;
 
-import org.gatein.api.commons.Query;
-import org.gatein.api.commons.Range;
+package org.gatein.api.i18n;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
- * Template
- *
- * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
+ * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
-public interface PageQuery extends Query<Page>
+public interface Localized<T> extends List<Localized.Value<T>>
 {
-   //TODO: sortByProperty? Property value conditions?
+   Value<T> getValue(Locale locale);
 
-   // Conditions
+   Value<T> setValue(Locale locale, T value);
 
-   PageQuery setName(String name);
+   void removeValue(Locale locale);
 
-   String getName();
+   public static interface Value<T>
+   {
+      T getValue();
 
-   PageQuery setId(String name);
+      void setValue(T value);
 
-   String getId();
-
-   PageQuery setTitle(String title);
-
-   String getTitle();
-
-   PageQuery setNavigation(Navigation navigation);
-
-   Navigation getNavigation();
-
-
-   // Query
-
-   PageQuery reset();
-
-   PageQuery immutable();
-
-   PageQuery clone();
-
-   int resultsCount();
-
-   PageQuery sort(boolean ascending);
-
-   PageQuery setRange(Range range);
-
-   Range getRange();
-
-   PageQuery nextPage();
-
-   PageQuery previousPage();
-
-   PageQuery firstPage();
-
-   PageQuery lastPage();
-
+      Locale getLocale();
+   }
 }

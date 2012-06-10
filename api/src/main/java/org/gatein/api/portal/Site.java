@@ -57,10 +57,6 @@ public interface Site
    //
    Navigation getNavigation();
 
-   Navigation getNavigation(String navigationId);
-
-   Navigation getNavigation(String... path);
-
    //TODO: Attributes
 
    <T> T getProperty(PropertyType<T> property);
@@ -73,7 +69,7 @@ public interface Site
 
       private String name;
 
-      private Id(Type type, String name)
+      Id(Type type, String name)
       {
          this.type = type;
          this.name = name;

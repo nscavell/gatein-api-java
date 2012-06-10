@@ -19,61 +19,34 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
+
 package org.gatein.api.portal;
 
-import org.gatein.api.commons.Query;
-import org.gatein.api.commons.Range;
+import org.gatein.api.i18n.Localized;
 
 /**
- * Template
- *
- * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
+ * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
-public interface PageQuery extends Query<Page>
+public interface Label extends Localized<String>
 {
-   //TODO: sortByProperty? Property value conditions?
+   /**
+    * Used to return the value of a non-localized label.
+    *
+    * @return the value of the label
+    */
+   String getValue();
 
-   // Conditions
+   /**
+    * Used to set the value of an non-localized label.
+    *
+    * @param value the value of the label
+    */
+   void setValue(String value);
 
-   PageQuery setName(String name);
-
-   String getName();
-
-   PageQuery setId(String name);
-
-   String getId();
-
-   PageQuery setTitle(String title);
-
-   String getTitle();
-
-   PageQuery setNavigation(Navigation navigation);
-
-   Navigation getNavigation();
-
-
-   // Query
-
-   PageQuery reset();
-
-   PageQuery immutable();
-
-   PageQuery clone();
-
-   int resultsCount();
-
-   PageQuery sort(boolean ascending);
-
-   PageQuery setRange(Range range);
-
-   Range getRange();
-
-   PageQuery nextPage();
-
-   PageQuery previousPage();
-
-   PageQuery firstPage();
-
-   PageQuery lastPage();
-
+   /**
+    * Indicates if the label is localized or not.
+    *
+    * @return true if the label is NOT localized
+    */
+   boolean isLocalized();
 }

@@ -35,7 +35,7 @@ import java.util.List;
  */
 public interface Page
 {
-   String getId();
+   Id getId();
 
    Site getSite();
 
@@ -57,5 +57,35 @@ public interface Page
    <T> void setProperty(PropertyType<T> property, T value);
 
 
+   class Id
+   {
+      private Site.Id siteId;
+      private String pageName;
 
+      private Id(Site.Id siteId, String pageName)
+      {
+         this.siteId = siteId;
+         this.pageName = pageName;
+      }
+
+      public Site.Id getSiteId()
+      {
+         return siteId;
+      }
+
+      public String getPageName()
+      {
+         return pageName;
+      }
+
+      public static Id create(Site.Type type, String siteName, String pageName)
+      {
+         return create(Site.Id.create(type, siteName), pageName);
+      }
+
+      public static Id create(Site.Id siteId, String pageName)
+      {
+         return new Id(siteId, pageName);
+      }
+   }
 }
