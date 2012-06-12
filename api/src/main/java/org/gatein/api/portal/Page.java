@@ -50,13 +50,6 @@ public interface Page
 
    //TODO: set/get showMaxWindow?
 
-   //TODO: Attributes
-
-   <T> T getProperty(PropertyType<T> property);
-
-   <T> void setProperty(PropertyType<T> property, T value);
-
-
    class Id
    {
       private Site.Id siteId;

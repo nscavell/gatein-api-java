@@ -42,14 +42,8 @@ public interface Navigation extends Iterable<Node>
 
    Node addNode(String name);
 
-   //TODO: What's the use case here ?. We can possibly move such traversal to the Hierarchical interface
+   //TODO: What's the use case here ?.
    void moveUp();
 
    void moveDown();
-
-   //TODO: Attributes
-
-   <T> T getProperty(PropertyType<T> property);
-
-   <T> void setProperty(PropertyType<T> property, T value);
 }
