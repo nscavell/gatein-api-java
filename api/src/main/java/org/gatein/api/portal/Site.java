@@ -46,10 +46,6 @@ public interface Site
 
    void setDescription(String description);
 
-   int getPriority();
-
-   void setPriority(int priority);
-
    List<Page> getPages();
 
    Page getPage(String pageName);
@@ -69,8 +65,11 @@ public interface Site
 
       private String name;
 
-      Id(Type type, String name)
+      private Id(Type type, String name)
       {
+         if (type == null) throw new IllegalArgumentException("Type cannot be null");
+         if (name == null) throw new IllegalArgumentException("name cannot be null");
+
          this.type = type;
          this.name = name;
       }
@@ -80,25 +79,26 @@ public interface Site
          return new Id(type, name);
       }
 
-      public static Id site(String name)
+      public static Id site(String siteName)
       {
-         return new Id(Type.SITE, name);
+         return create(Type.SITE, siteName);
       }
 
-      public static Id space(String... name)
+      public static Id space(String...groupName)
       {
          StringBuilder groupId = new StringBuilder();
-         for (String s : name)
+         for (String s : groupName)
          {
             groupId.append("/")
             .append(s);
          }
-         return new Id(Type.SPACE, groupId.toString());
+
+         return create(Type.SPACE, groupId.toString());
       }
 
-      public static Id dashboard(String name)
+      public static Id dashboard(String userName)
       {
-         return new Id(Type.DASHBOARD, name);
+         return create(Type.DASHBOARD, userName);
       }
 
       public Type getType()
@@ -120,7 +120,7 @@ public interface Site
 
    public static enum Type
    {
-      SITE, SPACE, DASHBOARD;
+      SITE, SPACE, DASHBOARD
    }
 
 }
