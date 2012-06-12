@@ -38,9 +38,7 @@ public interface Site
 
    Id getId();
 
-   String getDisplayName();
-
-   void setDisplayName(String displayName);
+   Label getLabel();
 
    String getDescription();
 
