@@ -45,9 +45,6 @@ public interface Page
 
    void setTitle(String title);
 
-   //TODO: ??
-   List<Navigation> getNavigations();
-
    //TODO: set/get showMaxWindow?
 
    class Id
