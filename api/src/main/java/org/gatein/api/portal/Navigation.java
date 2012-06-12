@@ -36,6 +36,8 @@ public interface Navigation extends Iterable<Node>
 
    int getPriority();
 
+   void setPriority(int priority);
+
    Node getNode(String...path);
 
    boolean removeNode(String...path);

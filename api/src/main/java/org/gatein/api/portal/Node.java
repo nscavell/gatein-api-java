@@ -52,7 +52,7 @@ public interface Node extends Iterable<Node>
 
    String getIcon();
 
-   String setIcon(String icon);
+   void setIcon(String icon);
 
    Page getPage();
 
