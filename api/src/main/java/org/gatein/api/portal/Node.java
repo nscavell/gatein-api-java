@@ -138,6 +138,8 @@ public interface Node extends Iterable<Node>
 
       public String getPathAsString()
       {
+         if (path == null) return null;
+
          StringBuilder sb = new StringBuilder();
          for (int i=0; i<path.length; i++)
          {
