@@ -22,13 +22,12 @@
 
 package org.gatein.api.i18n;
 
-import java.util.List;
 import java.util.Locale;
 
 /**
  * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
-public interface Localized<T> extends List<Localized.Value<T>>
+public interface Localized<T> extends Iterable<Localized.Value<T>>
 {
    Value<T> getValue(Locale locale);
 
