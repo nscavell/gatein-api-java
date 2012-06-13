@@ -32,6 +32,8 @@ import java.util.Date;
  */
 public interface Node extends Iterable<Node>
 {
+   Id getId();
+
    String getName();
 
    Node getParent();
@@ -45,8 +47,6 @@ public interface Node extends Iterable<Node>
    void removeDescendant(String... path) throws EntityNotFoundException;
 
    Node addChild(String name);
-
-   String[] getPath();
 
    URI getURI();
 
@@ -112,5 +112,53 @@ public interface Node extends Iterable<Node>
       VISIBLE,
       HIDDEN,
       PUBLICATION
+   }
+
+   class Id
+   {
+      private final Site.Id siteId;
+      private final String[] path;
+
+      private Id(Site.Id siteId, String[] path)
+      {
+         this.siteId = siteId;
+         this.path = path;
+      }
+
+      public Site.Id getSiteId()
+      {
+         return siteId;
+      }
+
+      public String[] getPath()
+      {
+         return path;
+      }
+
+      public String getPathAsString()
+      {
+         StringBuilder sb = new StringBuilder();
+         for (int i=0; i<path.length; i++)
+         {
+            if (i > 0)
+            {
+               sb.append('/');
+            }
+            sb.append(path[i]);
+         }
+
+         return sb.toString();
+      }
+
+      @Override
+      public String toString()
+      {
+         return "Node.Id[path=" + getPathAsString() + ", " + siteId + "]";
+      }
+
+      public static Id create(Site.Id siteId, String...path)
+      {
+         return new Id(siteId, path);
+      }
    }
 }

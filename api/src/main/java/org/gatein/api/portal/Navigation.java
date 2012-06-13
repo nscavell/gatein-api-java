@@ -23,7 +23,6 @@
 
 package org.gatein.api.portal;
 
-import org.gatein.api.commons.PropertyType;
 import org.gatein.api.exception.EntityNotFoundException;
 
 /**

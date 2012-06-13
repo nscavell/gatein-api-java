@@ -49,8 +49,8 @@ public interface Page
 
    class Id
    {
-      private Site.Id siteId;
-      private String pageName;
+      private final Site.Id siteId;
+      private final String pageName;
 
       private Id(Site.Id siteId, String pageName)
       {
@@ -66,6 +66,12 @@ public interface Page
       public String getPageName()
       {
          return pageName;
+      }
+
+      @Override
+      public String toString()
+      {
+         return "Page.Id[pageName="+pageName+", " + siteId+"]";
       }
 
       public static Id create(Site.Type type, String siteName, String pageName)
