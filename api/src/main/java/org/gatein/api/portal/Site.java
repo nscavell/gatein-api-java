@@ -25,6 +25,7 @@ package org.gatein.api.portal;
 
 
 import org.gatein.api.commons.PropertyType;
+import org.gatein.api.exception.EntityNotFoundException;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public interface Site
 
    Page getPage(String pageName);
 
-   boolean removePage(String pageName);
+   void removePage(String pageName) throws EntityNotFoundException;
 
    //
    Navigation getNavigation();

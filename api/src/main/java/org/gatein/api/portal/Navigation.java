@@ -24,6 +24,7 @@
 package org.gatein.api.portal;
 
 import org.gatein.api.commons.PropertyType;
+import org.gatein.api.exception.EntityNotFoundException;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
@@ -40,7 +41,7 @@ public interface Navigation extends Iterable<Node>
 
    Node getNode(String...path);
 
-   boolean removeNode(String...path);
+   void removeNode(String...path) throws EntityNotFoundException;
 
    Node addNode(String name);
 

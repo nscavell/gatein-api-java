@@ -22,6 +22,8 @@
 
 package org.gatein.api.portal;
 
+import org.gatein.api.exception.EntityNotFoundException;
+
 import java.net.URI;
 import java.util.Date;
 
@@ -38,9 +40,9 @@ public interface Node extends Iterable<Node>
 
    Node getDescendant(String... path);
 
-   boolean removeChild(String name);
+   void removeChild(String name) throws EntityNotFoundException;
 
-   boolean removeDescendant(String... path);
+   void removeDescendant(String... path) throws EntityNotFoundException;
 
    Node addChild(String name);
 
