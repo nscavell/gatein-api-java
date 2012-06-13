@@ -111,7 +111,8 @@ public interface Node extends Iterable<Node>
    {
       VISIBLE,
       HIDDEN,
-      PUBLICATION
+      PUBLICATION,
+      SYSTEM
    }
 
    class Id
