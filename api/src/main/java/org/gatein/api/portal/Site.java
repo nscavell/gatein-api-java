@@ -48,6 +48,8 @@ public interface Site
 
    Page getPage(String pageName);
 
+   boolean removePage(String pageName);
+
    //
    Navigation getNavigation();
 
