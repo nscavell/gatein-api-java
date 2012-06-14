@@ -48,6 +48,8 @@ public interface Node extends Iterable<Node>
 
    Node addChild(String name);
 
+   int getCount();
+
    URI getURI();
 
    Label getLabel();
