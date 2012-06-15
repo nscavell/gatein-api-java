@@ -68,13 +68,9 @@ public interface SiteQuery<T extends Site> extends Query
 
    SiteQuery<T> clone();
 
-   int resultsCount();
-
    SiteQuery<T> sort(boolean ascending);
 
    SiteQuery<T> setRange(Range range);
-
-   Range getRange();
 
    SiteQuery<T> nextPage();
 
