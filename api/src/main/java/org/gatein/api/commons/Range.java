@@ -42,7 +42,7 @@ public class Range
       this.limit = limit;
    }
 
-   public ()int getPage()
+   public int getPage()
    {
       if (offset == 0 || offset < limit || limit == 0)
       {
