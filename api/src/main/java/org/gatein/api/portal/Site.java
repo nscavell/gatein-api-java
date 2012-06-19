@@ -85,6 +85,11 @@ public interface Site
          return create(Type.SITE, siteName);
       }
 
+      public static Id space(String groupId)
+      {
+         return create(Type.SPACE, groupId);
+      }
+
       public static Id space(String...groupName)
       {
          StringBuilder groupId = new StringBuilder();

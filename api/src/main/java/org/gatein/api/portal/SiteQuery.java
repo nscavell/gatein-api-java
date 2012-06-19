@@ -25,6 +25,8 @@ package org.gatein.api.portal;
 import org.gatein.api.commons.Query;
 import org.gatein.api.commons.Range;
 
+import java.util.List;
+
 /**
  * Template
  *
@@ -72,6 +74,8 @@ public interface SiteQuery<T extends Site> extends Query
 
    SiteQuery<T> setRange(Range range);
 
+   SiteQuery<T> setPage(int number);
+
    SiteQuery<T> nextPage();
 
    SiteQuery<T> previousPage();
@@ -80,5 +84,5 @@ public interface SiteQuery<T extends Site> extends Query
 
    SiteQuery<T> lastPage();
 
-
+   List<T> execute();
 }

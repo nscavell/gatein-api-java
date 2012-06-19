@@ -50,6 +50,8 @@ public interface Query<T>
 
    int getCurrentPage();
 
+   Query<T> setPage(int number);
+
    Query<T> nextPage();
 
    Query<T> previousPage();
