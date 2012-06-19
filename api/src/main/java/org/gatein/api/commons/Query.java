@@ -38,13 +38,19 @@ public interface Query<T>
 
    List<T> execute();
 
-   int resultsCount();
+   int getResultsCount();
+
+   int getPageCount();
 
    Query<T> sort(boolean ascending);
 
    Query<T> setRange(Range range);
 
    Range getRange();
+
+   int getCurrentPage();
+
+   Query<T> setPage(int number);
 
    Query<T> nextPage();
 

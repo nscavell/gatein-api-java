@@ -30,9 +30,9 @@ public class Range
 {
    //TODO: Just a quick impl
 
-   private int offset;
+   private int offset = 0;
    
-   private int limit = -1;
+   private int limit = 0;
 
    private Range() {}
 
@@ -42,11 +42,14 @@ public class Range
       this.limit = limit;
    }
 
-   int getPage()
+   public int getPage()
    {
-      //TODO: Calculate current page based on limit/offset.
-      //TODO: Should it start from 0 or 1? Rather 1?....
-      return 1;
+      if (offset == 0 || offset < limit || limit == 0)
+      {
+         return 0;
+      }
+
+      return offset / limit;
    }
 
    public int getOffset()
@@ -59,7 +62,7 @@ public class Range
       return limit;
    }
 
-   public Range of(int offset, int limit)
+   public static Range of(int offset, int limit)
    {
       return new Range(offset, limit);
    }
@@ -77,6 +80,12 @@ public class Range
       {
          offset = 0;
       }
+      return this;
+   }
+
+   public Range first()
+   {
+      offset = 0;
       return this;
    }
 

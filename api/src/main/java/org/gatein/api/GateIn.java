@@ -69,32 +69,4 @@ public interface GateIn
 
    <T> void setProperty(PropertyType<T> property, T value);
 
-
-   //
-   String LIFECYCLEMANAGER_TYPE_NAME = "org.gatein.api.lifecyclemanager";
-
-   PropertyType<LifecycleManager> LIFECYCLE_MANAGER = new PropertyType<LifecycleManager>(LIFECYCLEMANAGER_TYPE_NAME)
-   {
-   };
-
-   LifecycleManager NO_OP_MANAGER = new LifecycleManager()
-   {
-      public void begin()
-      {
-         // do nothing
-      }
-
-      public void end()
-      {
-         // do nothing
-      }
-   };
-
-   public interface LifecycleManager
-   {
-      void begin();
-
-      void end();
-   }
-
 }
