@@ -128,6 +128,28 @@ public interface Site
       {
          return "Site.Id[type="+type+", name="+name+"]";
       }
+
+      @Override
+      public boolean equals(Object o)
+      {
+         if (this == o) return true;
+         if (o == null || getClass() != o.getClass()) return false;
+
+         Id id = (Id) o;
+
+         if (!name.equals(id.name)) return false;
+         if (type != id.type) return false;
+
+         return true;
+      }
+
+      @Override
+      public int hashCode()
+      {
+         int result = type.hashCode();
+         result = 31 * result + name.hashCode();
+         return result;
+      }
    }
 
    public static enum Type

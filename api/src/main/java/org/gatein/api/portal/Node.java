@@ -25,6 +25,7 @@ package org.gatein.api.portal;
 import org.gatein.api.exception.EntityNotFoundException;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -161,8 +162,32 @@ public interface Node extends Iterable<Node>
          return "Node.Id[path=" + getPathAsString() + ", " + siteId + "]";
       }
 
+      @Override
+      public boolean equals(Object o)
+      {
+         if (this == o) return true;
+         if (o == null || getClass() != o.getClass()) return false;
+
+         Id id = (Id) o;
+
+         if (!Arrays.equals(path, id.path)) return false;
+         if (!siteId.equals(id.siteId)) return false;
+
+         return true;
+      }
+
+      @Override
+      public int hashCode()
+      {
+         int result = siteId.hashCode();
+         result = 31 * result + (path != null ? Arrays.hashCode(path) : 0);
+         return result;
+      }
+
       public static Id create(Site.Id siteId, String...path)
       {
+         if (siteId == null) throw new IllegalArgumentException("siteId cannot be null");
+
          return new Id(siteId, path);
       }
    }

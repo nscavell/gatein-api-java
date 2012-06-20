@@ -83,5 +83,27 @@ public interface Page
       {
          return new Id(siteId, pageName);
       }
+
+      @Override
+      public boolean equals(Object o)
+      {
+         if (this == o) return true;
+         if (o == null || getClass() != o.getClass()) return false;
+
+         Id id = (Id) o;
+
+         if (!pageName.equals(id.pageName)) return false;
+         if (!siteId.equals(id.siteId)) return false;
+
+         return true;
+      }
+
+      @Override
+      public int hashCode()
+      {
+         int result = siteId.hashCode();
+         result = 31 * result + pageName.hashCode();
+         return result;
+      }
    }
 }
