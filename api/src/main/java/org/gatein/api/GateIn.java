@@ -57,6 +57,8 @@ public interface GateIn
 
    SiteQuery<Site> createSiteQuery();
 
+   Site addSite(Site.Id id);
+
    Site addSite(Site.Type siteType, String name);
 
    void removeSite(Site.Id siteId) throws EntityNotFoundException;

@@ -25,6 +25,8 @@ package org.gatein.api.portal;
 
 
 import org.gatein.api.commons.PropertyType;
+import org.gatein.api.commons.Range;
+import org.gatein.api.exception.EntityAlreadyExistsException;
 import org.gatein.api.exception.EntityNotFoundException;
 
 import java.util.List;
@@ -47,7 +49,11 @@ public interface Site
 
    List<Page> getPages();
 
+   List<Page> getPages(Range range);
+
    Page getPage(String pageName);
+
+   Page createPage(String pageName) throws EntityAlreadyExistsException;
 
    void removePage(String pageName) throws EntityNotFoundException;
 
