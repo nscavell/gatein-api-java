@@ -23,6 +23,7 @@
 
 package org.gatein.api.portal;
 
+import org.gatein.api.exception.EntityAlreadyExistsException;
 import org.gatein.api.exception.EntityNotFoundException;
 
 /**
@@ -40,9 +41,15 @@ public interface Navigation extends Iterable<Node>
 
    Node getNode(String...path);
 
-   void removeNode(String...path) throws EntityNotFoundException;
+   boolean removeNode(String...path) throws EntityNotFoundException;
 
-   Node addNode(String name);
+   Node addNode(String...path) throws EntityAlreadyExistsException;
+
+   /**
+    * The node count representing the child nodes of the root navigation.
+    * @return the node count
+    */
+   int getNodeCount();
 
    //TODO: What's the use case here ?.
    void moveUp();

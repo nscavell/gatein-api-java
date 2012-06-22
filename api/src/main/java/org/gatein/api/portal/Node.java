@@ -22,6 +22,7 @@
 
 package org.gatein.api.portal;
 
+import org.gatein.api.exception.ApiException;
 import org.gatein.api.exception.EntityNotFoundException;
 
 import java.net.URI;
@@ -39,17 +40,15 @@ public interface Node extends Iterable<Node>
 
    Node getParent();
 
+   boolean removeNode();
+
    Node getChild(String name);
 
-   Node getDescendant(String... path);
-
-   void removeChild(String name) throws EntityNotFoundException;
-
-   void removeDescendant(String... path) throws EntityNotFoundException;
+   boolean removeChild(String name) throws EntityNotFoundException;
 
    Node addChild(String name);
 
-   int getCount();
+   int getChildCount();
 
    URI getURI();
 
@@ -61,9 +60,9 @@ public interface Node extends Iterable<Node>
 
    Page getPage();
 
-   Page.Id getPageReference();
+   Page.Id getPageId();
 
-   void setPageReference(Page.Id pageId);
+   void setPageId(Page.Id pageId);
 
    Visibility getVisibility();
 
