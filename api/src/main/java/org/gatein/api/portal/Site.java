@@ -38,7 +38,6 @@ import java.util.List;
  */
 public interface Site
 {
-
    Id getId();
 
    Label getLabel();
@@ -74,8 +73,14 @@ public interface Site
 
       private Id(Type type, String name)
       {
-         if (type == null) throw new IllegalArgumentException("Type cannot be null");
-         if (name == null) throw new IllegalArgumentException("name cannot be null");
+         if (type == null)
+         {
+            throw new IllegalArgumentException("Type cannot be null");
+         }
+         if (name == null)
+         {
+            throw new IllegalArgumentException("name cannot be null");
+         }
 
          this.type = type;
          this.name = name;
@@ -96,13 +101,13 @@ public interface Site
          return create(Type.SPACE, groupId);
       }
 
-      public static Id space(String...groupName)
+      public static Id space(String... groupName)
       {
          StringBuilder groupId = new StringBuilder();
          for (String s : groupName)
          {
             groupId.append("/")
-            .append(s);
+               .append(s);
          }
 
          return create(Type.SPACE, groupId.toString());
@@ -123,22 +128,62 @@ public interface Site
          return name;
       }
 
+      public static String asString(Id id)
+      {
+         return id.getType().name + "--" + id.name.replace("/", "__");
+      }
+
+      public static Id fromString(String idAsString)
+      {
+         if(idAsString != null && idAsString.length() > 4)
+         {
+            final String[] components = idAsString.split("--");
+            if(components.length == 2)
+            {
+               final Type type = Type.fromString(components[0]);
+               if(type != null)
+               {
+                  return create(type, components[1].replace("__", "/"));
+               }
+            }
+         }
+
+         throw new IllegalArgumentException("Invalid Site.Id: " + idAsString);
+      }
+
       @Override
       public String toString()
       {
-         return "Site.Id[type="+type+", name="+name+"]";
+         return "Site.Id[type=" + type + ", name=" + name + "]";
+      }
+
+      public String getAsString()
+      {
+         return asString(this);
       }
 
       @Override
       public boolean equals(Object o)
       {
-         if (this == o) return true;
-         if (o == null || getClass() != o.getClass()) return false;
+         if (this == o)
+         {
+            return true;
+         }
+         if (o == null || getClass() != o.getClass())
+         {
+            return false;
+         }
 
-         Id id = (Id) o;
+         Id id = (Id)o;
 
-         if (!name.equals(id.name)) return false;
-         if (type != id.type) return false;
+         if (!name.equals(id.name))
+         {
+            return false;
+         }
+         if (type != id.type)
+         {
+            return false;
+         }
 
          return true;
       }
@@ -154,7 +199,32 @@ public interface Site
 
    public static enum Type
    {
-      SITE, SPACE, DASHBOARD
+      SITE(SITE_NAME), SPACE(SPACE_NAME), DASHBOARD(DASHBOARD_NAME);
+
+      private final String name;
+
+      private Type(String name)
+      {
+         this.name = name;
+      }
+
+      static Type fromString(String typeAsString)
+      {
+         if(typeAsString != null)
+         {
+            for (Type type : Type.values())
+            {
+               if(type.name.equalsIgnoreCase(typeAsString))
+               {
+                  return type;
+               }
+            }
+         }
+         return null;
+      }
    }
 
+   String SITE_NAME = "site";
+   String SPACE_NAME = "space";
+   String DASHBOARD_NAME = "dashboard";
 }
