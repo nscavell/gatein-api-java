@@ -32,6 +32,7 @@ import org.gatein.api.exception.EntityNotFoundException;
 import org.gatein.api.security.SecurityRestriction;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
@@ -40,7 +41,6 @@ import java.util.List;
  */
 public interface Site
 {
-
    /**
     * @return Id of the site
     */
@@ -62,7 +62,17 @@ public interface Site
     */
    void setDescription(String description);
 
-   //
+   /**
+    * @return the locale of the site
+    */
+   Locale getLocale();
+
+   /**
+    * Sets the locale of the site.
+    *
+    * @param locale the locale of the site
+    */
+   void setLocale(Locale locale);
 
    /**
     * @return List of pages related to this site
@@ -111,14 +121,10 @@ public interface Site
     */
    void removePage(String pageName) throws EntityNotFoundException;
 
-   //
-
    /**
     * @return Navigation object associated with the site
     */
    Navigation getNavigation();
-
-   //
 
    /**
     * @param type Type of SecurityRestriction object to obtain

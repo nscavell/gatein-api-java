@@ -30,14 +30,19 @@ import org.gatein.api.i18n.Localized;
 public interface Label extends Localized<String>
 {
    /**
-    * Used to return the value of a non-localized label.
+    * Used to return the value of the label. If the label is localized it will use the default locale of the request.
+    * If it's not localized it can still be a resource bundle expression in which case the resolve parameter can be used
+    * to resolve the value from the resource bundle.
     *
+    * @param resolve true if the label is to be resolved. If it's a localized or a non resource bundle expression, this
+    *                parameter is ignore.
     * @return the value of the label
     */
-   String getValue();
+   String getValue(boolean resolve);
 
    /**
-    * Used to set the value of an non-localized label.
+    * Used to set the value w/out specifying the locale. If it's localized it will use the
+    * default locale of the request.
     *
     * @param value the value of the label
     */
