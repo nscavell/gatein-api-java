@@ -133,8 +133,7 @@ public interface Site
    SecurityRestriction getSecurityRestriction(SecurityRestriction.Type type);
 
    /**
-    * Updates security restrictions for the site. If new access restriction of Type.ACCESS is updated then
-    * the site is automatically set to be not public. It is equivalent of calling setPublic(true)
+    * Updates security restrictions for the site.
     * @param securirtyRestriction SecurityRestriction object to update. Cannot be null
     */
    void updateSecurityRestriction(SecurityRestriction securirtyRestriction);
