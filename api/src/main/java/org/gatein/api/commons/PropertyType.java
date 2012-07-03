@@ -26,6 +26,7 @@ package org.gatein.api.commons;
 import java.lang.reflect.ParameterizedType;
 
 /**
+ *
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @version $Revision$
  */

@@ -23,6 +23,8 @@
 package org.gatein.api.exception;
 
 /**
+ * Exception thrown when entity already exists and cannot be created.
+ *
  * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
 public class EntityAlreadyExistsException extends ApiException

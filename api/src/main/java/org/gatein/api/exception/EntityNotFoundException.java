@@ -23,6 +23,8 @@
 package org.gatein.api.exception;
 
 /**
+ * Exception thrown when entity cannot be found.
+ *
  * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
 public class EntityNotFoundException extends ApiException

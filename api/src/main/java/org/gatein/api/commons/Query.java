@@ -24,39 +24,108 @@ package org.gatein.api.commons;
 import java.util.List;
 
 /**
- * Template
+ * Query
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
 public interface Query<T>
 {
+
+   /**
+    * Reset query to clean state and revert any modifications
+    * @return Modified query
+    */
    Query<T> reset();
 
+   /**
+    *
+    * @return Immutable version of a query
+    */
    Query<T> immutable();
 
+   /**
+    *
+    * @return Clone - new instance - of a query
+    */
    Query<T> clone();
 
+   /**
+    * Execute query
+    *
+    * @return List of query results
+    */
    List<T> execute();
 
+   /**
+    *
+    * @return Number of query results
+    */
    int getResultsCount();
 
+   /**
+    * Calculates number of pages based on result from getResultsCount() and getRange().
+    *
+    * @return Number of pages
+    */
    int getPageCount();
 
+   /**
+    * Set if query should be sorted
+    *
+    * @param ascending - if true query will be sorted in ascending order
+    * @return Modified query
+    */
    Query<T> sort(boolean ascending);
 
+   /**
+    * @param range Range object defining starting point and number of returned results - a page.
+    *              If null range will be removed.
+    * @return Modified query
+    */
    Query<T> setRange(Range range);
 
+   /**
+    * @return Currently set range object. Can be null
+    */
    Range getRange();
 
+   /**
+    * Returns current page calculated from currently set Range object
+    *
+    * @return Current page number. 0 if getRange() returns null
+    */
    int getCurrentPage();
 
+   /**
+    * Does nothing if getRange() returns null
+    *
+    * @param number Current page index
+    * @return Modified query.
+    */
    Query<T> setPage(int number);
 
+   /**
+    * Move to next page. Equivalent to getRange().next(). Does nothing if getRange() returns null
+    * @return Modified query.
+    */
    Query<T> nextPage();
 
+   /**
+    * Move to previous page. Equivalent to getRange().previous(). Does nothing if getRange() returns null
+    * @return Modified query.
+    */
    Query<T> previousPage();
 
+   /**
+    * Move to the first page. Equivalent to getRange().first(). Does nothing if getRange returns null
+    * @return Modified query.
+    */
    Query<T> firstPage();
 
+
+   /**
+    * Move to the last page. Does nothing if getRange returns null
+    * @return Modified query.
+    */
    Query<T> lastPage();
 }

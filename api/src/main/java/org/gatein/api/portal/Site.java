@@ -28,6 +28,7 @@ import org.gatein.api.commons.PropertyType;
 import org.gatein.api.commons.Range;
 import org.gatein.api.exception.EntityAlreadyExistsException;
 import org.gatein.api.exception.EntityNotFoundException;
+import org.gatein.api.security.AccessRestriction;
 
 import java.util.List;
 
@@ -39,26 +40,115 @@ import java.util.List;
 public interface Site
 {
 
+   /**
+    * @return Id of the site
+    */
    Id getId();
 
+   /**
+    * @return Label of the site
+    */
    Label getLabel();
 
+   /**
+    * @return Description of the site
+    */
    String getDescription();
 
+   /**
+    * Set description of the site
+    * @param description Description of the site
+    */
    void setDescription(String description);
 
+   //
+
+   /**
+    * @return List of pages related to this site
+    */
    List<Page> getPages();
 
+   /**
+    * @param range Range of pages to return
+    * @return List of pages related to this site
+    */
    List<Page> getPages(Range range);
 
+   /**
+    *
+    * @param pageFilter PageFilter to filter items from returned list
+    * @return List of pages related to this site
+    */
+   List<Page> getPages(PageFilter pageFilter);
+
+   /**
+    *
+    * @param pageFilter PageFilter to filter items from returned list
+    * @param range Range of pages to return
+    * @return List of pages related to this site
+    */
+   List<Page> getPages(PageFilter pageFilter, Range range);
+
+   /**
+    * @param pageName Name of the page
+    * @return The page
+    */
    Page getPage(String pageName);
 
+   /**
+    * Create new page
+    * @param pageName Name of the page
+    * @return New page
+    * @throws EntityAlreadyExistsException
+    */
    Page createPage(String pageName) throws EntityAlreadyExistsException;
 
+   /**
+    * Remove page
+    * @param pageName Name of the page
+    * @throws EntityNotFoundException
+    */
    void removePage(String pageName) throws EntityNotFoundException;
 
    //
+
+   /**
+    * @return Navigation object associated with the site
+    */
    Navigation getNavigation();
+
+   //
+
+   /**
+    * @param type Type of AccessRestriction object to obtain
+    * @return The AccessRestriction object. Can be null if site is public
+    */
+   AccessRestriction getAccessRestriction(AccessRestriction.Type type);
+
+   /**
+    * Updates access restrictions for the site. If new access restriction of Type.ACCESS is updated then
+    * the site is automatically set to be not public. It is equivalent of calling setPublic(true)
+    * @param accessRestriction AccessRestriction object to update. Cannot be null
+    */
+   void updateAccessRestriction(AccessRestriction accessRestriction);
+
+   /**
+    * @return true if site is accessible to anyone
+    */
+   boolean isPublic();
+
+   /**
+    * Switches site to public. If this method is invoked with value "true" then it will remove any related
+    * AccessRestriction with Type.ACCESS
+    * @param access
+    */
+   void setPublic(boolean access);
+
+   /**
+    * @param user Name of the user
+    * @return true if given user can access the site
+    */
+   boolean hasAccess(String user);
 
    //TODO: Attributes
 

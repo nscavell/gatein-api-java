@@ -22,11 +22,20 @@
 package org.gatein.api.portal;
 
 /**
- * Template
+ * PageFilter is used to filter out pages in a search
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public enum PageType
+public interface PageFilter
 {
-   GROUP, PORTAL;
+
+   /**
+    * If "true" is returned given page will remain in search results.
+    *
+    * @param page
+    * @return
+    */
+   boolean filter(Page page);
+
+
 }

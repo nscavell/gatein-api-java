@@ -25,6 +25,8 @@ package org.gatein.api.i18n;
 import java.util.Locale;
 
 /**
+ * Localized iterable entity
+ *
  * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
 public interface Localized<T> extends Iterable<Localized.Value<T>>

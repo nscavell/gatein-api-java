@@ -25,6 +25,7 @@ package org.gatein.api.portal;
 
 
 import org.gatein.api.commons.PropertyType;
+import org.gatein.api.security.AccessRestriction;
 
 import java.util.List;
 
@@ -35,18 +36,68 @@ import java.util.List;
  */
 public interface Page
 {
+   /**
+    * @return Page Id
+    */
    Id getId();
 
+   /**
+    * @return Site to which this page belongs
+    */
    Site getSite();
 
+   /**
+    * @return Name of the page
+    */
    String getName();
 
+   /**
+    * @return Title of the page
+    */
    String getTitle();
 
+   /**
+    * @param title Title of the page
+    */
    void setTitle(String title);
 
    //TODO: set/get showMaxWindow?
 
+
+   /**
+    * @param type Type of AccessRestriction object to obtain
+    * @return The AccessRestriction object. Can be null if page is public
+    */
+   AccessRestriction getAccessRestriction(AccessRestriction.Type type);
+
+   /**
+    * Updates access restrictions for the page. If new access restriction of Type.ACCESS is updated then
+    * the page is automatically set to be not public. It is equivalent of calling setPublic(true)
+    * @param accessRestriction AccessRestriction object to update. Cannot be null
+    */
+   void updateAccessRestriction(AccessRestriction accessRestriction);
+
+   /**
+    * @return true if page is accessible to anyone
+    */
+   boolean isPublic();
+
+   /**
+    * Switches page to public. If this method is invoked with value "true" then it will remove any related
+    * AccessRestriction with Type.ACCESS
+    * @param access
+    */
+   void setPublic(boolean access);
+
+   /**
+    * @param user Name of the user
+    * @return true if given user can access the page
+    */
+   boolean hasAccess(String user);
+
+   /**
+    * Page Id
+    */
    class Id
    {
       private final Site.Id siteId;
@@ -58,27 +109,47 @@ public interface Page
          this.pageName = pageName;
       }
 
+      /**
+       * @return Id of the site
+       */
       public Site.Id getSiteId()
       {
          return siteId;
       }
 
+      /**
+       * @return Name of the page
+       */
       public String getPageName()
       {
          return pageName;
       }
 
+      /**
+       * @return String representation of the Id
+       */
       @Override
       public String toString()
       {
          return "Page.Id[pageName="+pageName+", " + siteId+"]";
       }
 
+      /**
+       * @param type Type of the site
+       * @param siteName Name of the site
+       * @param pageName Name of the page
+       * @return The page id
+       */
       public static Id create(Site.Type type, String siteName, String pageName)
       {
          return create(Site.Id.create(type, siteName), pageName);
       }
 
+      /**
+       * @param siteId Id of the site
+       * @param pageName Name of the page
+       * @return The page id
+       */
       public static Id create(Site.Id siteId, String pageName)
       {
          return new Id(siteId, pageName);

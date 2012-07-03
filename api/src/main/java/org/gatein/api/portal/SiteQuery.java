@@ -28,23 +28,41 @@ import org.gatein.api.commons.Range;
 import java.util.List;
 
 /**
- * Template
+ * Enables performing more complex queries for sites.
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public interface SiteQuery<T extends Site> extends Query
+public interface SiteQuery<T extends Site> extends Query<Site>
 {
 
    //TODO: sortByProperty? Property value conditions?
 
    // Conditions
 
+   /**
+    *
+    * @param id
+    * @return
+    */
    SiteQuery<T> setId(Site.Id id);
 
+   /**
+    *
+    * @return
+    */
    Site.Id getId();
 
+   /**
+    *
+    * @param siteType
+    * @return
+    */
    SiteQuery<T> setType(Site.Type siteType);
 
+   /**
+    *
+    * @return
+    */
    Site.Type getType();
 
    SiteQuery<T> setUserId(String userId);
@@ -64,25 +82,69 @@ public interface SiteQuery<T extends Site> extends Query
 
    // General
 
+   /**
+    * Reset query to clean state and revert any modifications
+    * @return Modified query
+    */
    SiteQuery<T> reset();
 
+   /**
+    *
+    * @return Immutable version of a query
+    */
    SiteQuery<T> immutable();
 
+   /**
+    *
+    * @return Clone - new instance - of a query
+    */
    SiteQuery<T> clone();
 
+   /**
+    * Set if query should be sorted
+    *
+    * @param ascending - if true query will be sorted in ascending order
+    * @return Modified query
+    */
    SiteQuery<T> sort(boolean ascending);
 
+   /**
+    * @param range Range object defining starting point and number of returned results - a page.
+    *              If null range will be removed.
+    * @return Modified query
+    */
    SiteQuery<T> setRange(Range range);
 
+   /**
+    * Does nothing if getRange() returns null
+    *
+    * @param number Current page index
+    * @return Modified query.
+    */
    SiteQuery<T> setPage(int number);
 
+   /**
+    * Move to next page. Equivalent to getRange().next(). Does nothing if getRange() returns null
+    * @return Modified query.
+    */
    SiteQuery<T> nextPage();
 
+   /**
+    * Move to previous page. Equivalent to getRange().previous(). Does nothing if getRange() returns null
+    * @return Modified query.
+    */
    SiteQuery<T> previousPage();
 
+   /**
+    * Move to the first page. Equivalent to getRange().first(). Does nothing if getRange returns null
+    * @return Modified query.
+    */
    SiteQuery<T> firstPage();
 
+   /**
+    * Move to the last page. Does nothing if getRange returns null
+    * @return Modified query.
+    */
    SiteQuery<T> lastPage();
 
-   List<T> execute();
 }

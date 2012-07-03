@@ -27,32 +27,64 @@ import org.gatein.api.exception.EntityAlreadyExistsException;
 import org.gatein.api.exception.EntityNotFoundException;
 
 /**
+ * Representation of Navigation. It is a tree structure of nodes with associated Pages.
+ * Each Navigation has a matching Site.
+ *
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  * @version $Revision$
  */
 public interface Navigation extends Iterable<Node>
 {
+   /**
+    * Returns the site associated with the navigation.
+    *
+    * @return the site
+    */
    Site getSite();
 
+   /**
+    * //TODO: Not sure if this is proper description of priority and why/how it's used. Maybe we don't expose this ?
+    * Priority defines order in which navigation should be displayed in the UI.
+    *
+    * @return priority index
+    */
    int getPriority();
 
+   /**
+    * @param priority priority index to be set.
+    */
    void setPriority(int priority);
 
-   Node getNode(String...path);
+   /**
+    * Returns the node at the given path.
+    *
+    * @param path of a specific navigation node
+    * @return Node associated with specified path
+    */
+   Node getNode(String... path);
 
-   boolean removeNode(String...path) throws EntityNotFoundException;
+   /**
+    * Removes the node specified by the path
+    *
+    * @param path Path of node to be removed
+    * @return true if the node was removed, false otherwise
+    * @throws EntityNotFoundException if the node to be removed was not found
+    */
+   boolean removeNode(String... path) throws EntityNotFoundException;
 
-   Node addNode(String...path) throws EntityAlreadyExistsException;
+   /**
+    * Adds a node specified by the path.
+    *
+    * @param path Path of the node to add
+    * @return New node.
+    */
+   Node addNode(String... path) throws EntityAlreadyExistsException;
 
    /**
     * The node count representing the child nodes of the root navigation.
+    *
     * @return the node count
     */
    int getNodeCount();
-
-   //TODO: What's the use case here ?.
-   void moveUp();
-
-   void moveDown();
 }

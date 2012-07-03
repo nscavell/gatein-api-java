@@ -22,7 +22,6 @@
 
 package org.gatein.api.portal;
 
-import org.gatein.api.exception.ApiException;
 import org.gatein.api.exception.EntityNotFoundException;
 
 import java.net.URI;
@@ -34,37 +33,105 @@ import java.util.Date;
  */
 public interface Node extends Iterable<Node>
 {
+   /**
+    * @return Id of the node
+    */
    Id getId();
 
+   /**
+    * @return Name of the node
+    */
    String getName();
 
+   /**
+    * @return Parent of the node
+    */
    Node getParent();
 
+   /**
+    * Removes this node and detaches it from it's parent.
+    * @return true if the node was removed, false otherwise
+    */
    boolean removeNode();
 
+   /**
+    * @param name Name of the child node
+    * @return Child node
+    */
    Node getChild(String name);
 
+   /**
+    * Remove child node with given name
+    * @param name Name of the node to remove
+    * @return true if the child was removed, false otherwise
+    * @throws EntityNotFoundException if the child does not exist
+    */
    boolean removeChild(String name) throws EntityNotFoundException;
 
+   /**
+    * Create new child node
+    * @param name Name of the node
+    * @return New child node
+    */
    Node addChild(String name);
 
+   /**
+    * Returns the number of child nodes for the given node.
+    * @return number of child nodes
+    */
    int getChildCount();
 
+   /**
+    * @return URI of the node
+    */
    URI getURI();
 
+   /**
+    * @return Label of the node
+    */
    Label getLabel();
 
-   String getIcon();
+   /**
+    * @return Name of the icon for the node
+    */
+   String getIconName();
 
-   void setIcon(String icon);
+   /**
+    * Sets the name of the icon for the node
+    * @param iconName Name of the icon
+    */
+   void setIconName(String iconName);
 
+   /**
+    * @return Page associated with the node
+    */
    Page getPage();
 
+   /**
+    * @return Id of the page associated with the node
+    */
    Page.Id getPageId();
 
+   /**
+    * Associate Page with the node
+    * @param pageId Id of the page
+    */
    void setPageId(Page.Id pageId);
 
+   /**
+    * @return Visibility of the node
+    */
    Visibility getVisibility();
+
+   /**
+    * Make the node be displayed higher in the UI list.
+    */
+   void moveUp();
+
+   /**
+    * Make the node be displayed lower in the UI list.
+    */
+   void moveDown();
 
    /**
     * The start date of the publication of the navigation node.
