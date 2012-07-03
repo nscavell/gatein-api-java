@@ -114,7 +114,7 @@ public class SecurityRestriction
    /**
     * Represents pair of Group Id and MembershipType name.
     */
-   public class Entry
+   public static class Entry
    {
       private final String groupId;
       private final String membershipType;
@@ -134,7 +134,7 @@ public class SecurityRestriction
          this.membershipType = membership;
       }
 
-      public Entry create(String membershipType, String... group)
+      public static Entry create(String membershipType, String... group)
       {
          StringBuilder sb = new StringBuilder();
          for (String s : group)
@@ -146,7 +146,7 @@ public class SecurityRestriction
          return new Entry(membershipType, sb.toString());
       }
 
-      public Entry create(String membershipType, String groupId)
+      public static Entry create(String membershipType, String groupId)
       {
 
          return new Entry(membershipType, groupId);
@@ -157,7 +157,7 @@ public class SecurityRestriction
        * @param group
        * @return
        */
-      public Entry any(String... group)
+      public static Entry any(String... group)
       {
          return create("*", group);
       }
@@ -167,7 +167,7 @@ public class SecurityRestriction
        * @param groupId
        * @return
        */
-      public Entry any(String groupId)
+      public static Entry any(String groupId)
       {
          return create("*", groupId);
       }
