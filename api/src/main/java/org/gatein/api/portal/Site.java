@@ -28,7 +28,7 @@ import org.gatein.api.commons.PropertyType;
 import org.gatein.api.commons.Range;
 import org.gatein.api.exception.EntityAlreadyExistsException;
 import org.gatein.api.exception.EntityNotFoundException;
-import org.gatein.api.security.AccessRestriction;
+import org.gatein.api.security.SecurityRestriction;
 
 import java.util.List;
 
@@ -120,29 +120,17 @@ public interface Site
    //
 
    /**
-    * @param type Type of AccessRestriction object to obtain
-    * @return The AccessRestriction object. Can be null if site is public
+    * @param type Type of SecurityRestriction object to obtain
+    * @return The SecurityRestriction object. Can be null if site is public
     */
-   AccessRestriction getAccessRestriction(AccessRestriction.Type type);
+   SecurityRestriction getSecurityRestriction(SecurityRestriction.Type type);
 
    /**
-    * Updates access restrictions for the site. If new access restriction of Type.ACCESS is updated then
+    * Updates security restrictions for the site. If new access restriction of Type.ACCESS is updated then
     * the site is automatically set to be not public. It is equivalent of calling setPublic(true)
-    * @param accessRestriction AccessRestriction object to update. Cannot be null
+    * @param securirtyRestriction SecurityRestriction object to update. Cannot be null
     */
-   void updateAccessRestriction(AccessRestriction accessRestriction);
-
-   /**
-    * @return true if site is accessible to anyone
-    */
-   boolean isPublic();
-
-   /**
-    * Switches site to public. If this method is invoked with value "true" then it will remove any related
-    * AccessRestriction with Type.ACCESS
-    * @param access
-    */
-   void setPublic(boolean access);
+   void updateSecurityRestriction(SecurityRestriction securirtyRestriction);
 
    /**
     * @param user Name of the user

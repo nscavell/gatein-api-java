@@ -24,10 +24,7 @@
 package org.gatein.api.portal;
 
 
-import org.gatein.api.commons.PropertyType;
-import org.gatein.api.security.AccessRestriction;
-
-import java.util.List;
+import org.gatein.api.security.SecurityRestriction;
 
 /**
  * @author <a href="mailto:chris.laprun@jboss.com">Chris Laprun</a>
@@ -65,29 +62,16 @@ public interface Page
 
 
    /**
-    * @param type Type of AccessRestriction object to obtain
-    * @return The AccessRestriction object. Can be null if page is public
+    * @param type Type of SecurityRestriction object to obtain
+    * @return The SecurityRestriction object. Can be null if page is public
     */
-   AccessRestriction getAccessRestriction(AccessRestriction.Type type);
+   SecurityRestriction getSecurityRestriction(SecurityRestriction.Type type);
 
    /**
-    * Updates access restrictions for the page. If new access restriction of Type.ACCESS is updated then
-    * the page is automatically set to be not public. It is equivalent of calling setPublic(true)
-    * @param accessRestriction AccessRestriction object to update. Cannot be null
+    * Updates security restrictions for the page.
+    * @param securityRestriction SecurityRestriction object to update. Cannot be null
     */
-   void updateAccessRestriction(AccessRestriction accessRestriction);
-
-   /**
-    * @return true if page is accessible to anyone
-    */
-   boolean isPublic();
-
-   /**
-    * Switches page to public. If this method is invoked with value "true" then it will remove any related
-    * AccessRestriction with Type.ACCESS
-    * @param access
-    */
-   void setPublic(boolean access);
+   void updateSecurityRestriction(SecurityRestriction securityRestriction);
 
    /**
     * @param user Name of the user

@@ -30,14 +30,14 @@ import java.util.List;
  *
  * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
  */
-public class AccessRestriction
+public class SecurityRestriction
 {
 
    private final List<Entry> entries = new LinkedList<Entry>();
 
    private final Type type;
 
-   private AccessRestriction(Type type)
+   private SecurityRestriction(Type type)
    {
       this.type = type;
    }
@@ -45,17 +45,17 @@ public class AccessRestriction
    /**
     * @return New AccessRestriction object with Type.ACCESS
     */
-   public static AccessRestriction access()
+   public static SecurityRestriction access()
    {
-      return new AccessRestriction(Type.ACCESS);
+      return new SecurityRestriction(Type.ACCESS);
    }
 
    /**
     * @return New AccessRestriction object with Type.EDIT
     */
-   public static AccessRestriction edit()
+   public static SecurityRestriction edit()
    {
-      return new AccessRestriction(Type.EDIT);
+      return new SecurityRestriction(Type.EDIT);
    }
 
    /**
@@ -72,6 +72,35 @@ public class AccessRestriction
    public List<Entry> getEntries()
    {
       return entries;
+   }
+
+   /**
+    * @param entry The entry to add to the restriction
+    * @return SecurityRestriction object with added entry
+    */
+   public SecurityRestriction addEntry(Entry entry)
+   {
+      entries.add(entry);
+      return this;
+   }
+
+   /**
+    * @return true if there are no restriction entries
+    */
+   public boolean isPublic()
+   {
+      return entries.isEmpty();
+   }
+
+   /**
+    * Clears all current restcition entries
+    *
+    * @return SecurityRestriction object with applied change
+    */
+   public SecurityRestriction setPublic()
+   {
+      entries.clear();
+      return this;
    }
 
    /**
@@ -141,6 +170,14 @@ public class AccessRestriction
       public Entry any(String groupId)
       {
          return create("*", groupId);
+      }
+
+      /**
+       * @return true if membership type is equals to "*" (ANY membership"
+       */
+      public boolean isAny()
+      {
+         return membershipType.equals("*");
       }
 
       public String toString()
