@@ -24,6 +24,7 @@
 package org.gatein.api.portal;
 
 
+import org.gatein.api.commons.Filter;
 import org.gatein.api.commons.PropertyType;
 import org.gatein.api.commons.Range;
 import org.gatein.api.exception.EntityAlreadyExistsException;
@@ -76,18 +77,18 @@ public interface Site
 
    /**
     *
-    * @param pageFilter PageFilter to filter items from returned list
+    * @param filter the filter to filter pages from returned list
     * @return List of pages related to this site
     */
-   List<Page> getPages(PageFilter pageFilter);
+   List<Page> getPages(Filter<Page> filter);
 
    /**
     *
-    * @param pageFilter PageFilter to filter items from returned list
+    * @param filter the filter to filter pages from returned list
     * @param range Range of pages to return
     * @return List of pages related to this site
     */
-   List<Page> getPages(PageFilter pageFilter, Range range);
+   List<Page> getPages(Filter<Page> filter, Range range);
 
    /**
     * @param pageName Name of the page

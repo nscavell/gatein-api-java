@@ -23,6 +23,7 @@
 
 package org.gatein.api;
 
+import org.gatein.api.commons.Filter;
 import org.gatein.api.exception.EntityNotFoundException;
 import org.gatein.api.portal.Site;
 import org.gatein.api.portal.SiteQuery;
@@ -73,6 +74,23 @@ public interface GateIn
     * @return List of sites
     */
    List<Site> getSites(Site.Type siteType, Range range);
+
+   /**
+    * Return sites
+    *
+    * @param filter the filter to filter sites from returned list
+    * @return List of sites
+    */
+   List<Site> getSites(Filter<Site> filter);
+
+   /**
+    * Return sites
+    *
+    * @param filter the filter to filter sites from returned list
+    * @param range The range that will limit returned results
+    * @return List of sites
+    */
+   List<Site> getSites(Filter<Site> filter, Range range);
 
    /**
     *

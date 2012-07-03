@@ -19,23 +19,19 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.api.portal;
+
+package org.gatein.api.commons;
 
 /**
- * PageFilter is used to filter out pages in a search
- *
- * @author <a href="mailto:bdawidow@redhat.com">Boleslaw Dawidowicz</a>
+ * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
-public interface PageFilter
+public interface Filter<T>
 {
-
    /**
-    * If "true" is returned given page will remain in search results.
+    * Method to include (true) or exclude (false) from a list of results.
     *
-    * @param page
-    * @return
+    * @param data the object to test whether to include or not
+    * @return true to include false to exclude
     */
-   boolean filter(Page page);
-
-
+   boolean accept(T data);
 }
