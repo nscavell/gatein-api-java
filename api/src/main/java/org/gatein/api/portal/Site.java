@@ -46,6 +46,16 @@ public interface Site
    Id getId();
 
    /**
+    * @return Name of the site
+    */
+   String getName();
+
+   /**
+    * @return Type of the site
+    */
+   Type getType();
+
+   /**
     * @return Label of the site
     */
    Label getLabel();
