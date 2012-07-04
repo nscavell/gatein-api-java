@@ -122,9 +122,13 @@ public interface Site
    void removePage(String pageName) throws EntityNotFoundException;
 
    /**
-    * @return Navigation object associated with the site
+    * Retrieves the navigation for the given site, and optionally creates it.
+    *
+    * @param create if navigation doesn't exist, create it.
+    * @return the navigation associated with the site. Can return null if navigation doesn't exist and the parameter
+    * create is false.
     */
-   Navigation getNavigation();
+   Navigation getNavigation(boolean create);
 
    /**
     * @param type Type of SecurityRestriction object to obtain
