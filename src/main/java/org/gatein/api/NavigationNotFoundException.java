@@ -20,36 +20,21 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.gatein.api.portal.navigation;
+package org.gatein.api;
 
-import org.gatein.api.portal.page.PageId;
+import org.gatein.api.portal.site.SiteId;
 
 /**
- * A node visitor is used to walk the node tree. Some node visitor's are available in the <code>Nodes</code> utility
- * class, i.e. {@link Nodes#visitNodes(int)}
- *
- * @see Nodes
- * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
+ * Exception thrown when a site cannot be found.
+ * 
+ * @author <a href="mailto:sthorger@redhat.com">Stian Thorgersen</a>
  */
-public interface NodeVisitor
+public class NavigationNotFoundException extends ApiException
 {
-   /**
-    * Determines if more nodes should be visited.
-    *
-    * @param depth the current depth in the node hierarchy. This can be relative depending on where the visitor begins.
-    * @param node the node with just it's data, i.e. no child nodes.
-    * @return true to continue visiting children nodes
-    */
-   boolean visit(int depth, String name, NodeDetails details);
+   private static final long serialVersionUID = 1L;
 
-   public static interface NodeDetails
+   public NavigationNotFoundException(final SiteId siteId)
    {
-      public Visibility getVisibility();
-
-      public String getIconName();
-
-      public PageId getPageId();
-
-      public NodePath getNodePath();
+      super("Navigation for site '" + siteId + "' not found");
    }
 }

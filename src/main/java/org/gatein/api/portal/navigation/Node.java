@@ -27,22 +27,24 @@ import org.gatein.api.portal.Label;
 import org.gatein.api.portal.page.PageId;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.net.URI;
 import java.util.List;
 
 /**
  * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
-public class Node implements Serializable
+public class Node implements NodeContainer, Serializable
 {
+   public static final String ROOT_NAME = "root";
+
    private final String name;
    private Node parent;
    private Label label;
    private Visibility visibility;
    private String iconName;
    private PageId pageId;
-   private List<Node> children;
+   private NodeList children;
+   private URI uri;
 
    /**
     * Creates a new node with the specified name.
@@ -55,7 +57,7 @@ public class Node implements Serializable
 
       this.name = name;
       this.visibility = new Visibility();
-      this.children = new ArrayList<Node>();
+      this.children = new NodeList(this);
    }
 
    /**
@@ -98,7 +100,7 @@ public class Node implements Serializable
       this.pageId = node.pageId;
 
       // Copy children and associate their parent's accordingly
-      this.children = new ArrayList<Node>(node.children.size());
+      this.children = new NodeList(this, node.children.size());
       for (Node child : node.children)
       {
          this.children.add(new Node(child, this));
@@ -193,99 +195,32 @@ public class Node implements Serializable
       this.pageId = pageId;
    }
 
-   public Node getChild(int index)
+   public URI getURI()
    {
-      return children.get(index);
-   }
-
-   public Node getChild(String name)
-   {
-      for (Node node : children)
+      if (uri != null)
       {
-         if (node.name.equals(name)) return node;
+         return uri;
       }
-
-      return null;
-   }
-
-   public int getChildCount()
-   {
-      return children.size();
-   }
-
-   public List<Node> getChildren()
-   {
-      return Collections.unmodifiableList(children);
-   }
-
-   public void addChildren(List<Node> children)
-   {
-      for (Node child : children)
+      else if (parent != null && parent.getURI() != null)
       {
-         addChild(child);
-      }
-   }
-
-   public Node addChild(String name)
-   {
-      return addChild(-1, name);
-   }
-
-   public Node addChild(int index, String name)
-   {
-      return addChild(index, new Node(name));
-   }
-
-   public Node addChild(Node node)
-   {
-      return addChild(-1, node);
-   }
-
-   public Node addChild(int index, Node node)
-   {
-      if (node == this) throw new IllegalArgumentException("Cannot add itself as a child.");
-      if (node.parent != null) throw new IllegalArgumentException("Node being added is already associated with a parent. You can copy the node by passing it to the constructor which will remove the parent association.");
-
-      Node child = getChild(node.name);
-      if (child != null) throw new IllegalArgumentException("Child with name " + node.name + " already exists.");
-
-      node.setParent(this);
-      checkCyclic();
-
-      if (index < 0)
-      {
-         children.add(node);
+         return parent.getURI().resolve(name);
       }
       else
       {
-         children.add(index, node);
-      }
-
-      return node;
-   }
-
-   public Node removeNode(String name)
-   {
-      Node child = getChild(name);
-      if (child != null) children.remove(child);
-
-      return child;
-   }
-
-   private void checkCyclic()
-   {
-      Node current = this;
-      while ( (current = current.parent) != null)
-      {
-         if (this == current) throw new RuntimeException("Circular reference detected for node " + name);
+         return uri;
       }
    }
 
-   private void setParent(Node parent)
+   public void setUri(URI uri)
+   {
+      this.uri = uri;
+   }
+
+   void setParent(Node parent)
    {
       this.parent = parent;
    }
-
+   
    @Override
    public String toString()
    {
@@ -327,5 +262,35 @@ public class Node implements Serializable
       result = 31 * result + (pageId != null ? pageId.hashCode() : 0);
       result = 31 * result + (children != null ? children.hashCode() : 0);
       return result;
+   }
+
+   @Override
+   public boolean isNodesLoaded()
+   {
+      return children.isLoaded();
+   }
+
+   @Override
+   public void addNode(Node node)
+   {
+      children.add(node);
+   }
+
+   @Override
+   public Node getNode(String name)
+   {
+      return children.get(name);
+   }
+
+   @Override
+   public boolean removeNode(String name)
+   {
+      return children.remove(name);
+   }
+
+   @Override
+   public List<Node> getNodes()
+   {
+      return children;
    }
 }

@@ -22,10 +22,12 @@
 
 package org.gatein.api.portal.navigation;
 
+import org.gatein.api.ApiException;
+import org.gatein.api.portal.Label;
+import org.gatein.api.portal.page.PageId;
 import org.gatein.api.portal.site.SiteId;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,11 +35,11 @@ import java.util.List;
  *
  * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
  */
-public class Navigation implements Serializable
+public class Navigation implements NodeContainer, Serializable
 {
    private final SiteId siteId;
    private int priority;
-   private List<Node> nodes;
+   private Node rootNode;
 
    public Navigation(SiteId siteId, int priority)
    {
@@ -45,7 +47,7 @@ public class Navigation implements Serializable
 
       this.siteId = siteId;
       this.priority = priority;
-      this.nodes = new ArrayList<Node>();
+      this.rootNode = new RootNode();
    }
 
    public SiteId getSiteId()
@@ -63,38 +65,82 @@ public class Navigation implements Serializable
       this.priority = priority;
    }
 
-   public List<Node> getNodes()
+   @Override
+   public boolean isNodesLoaded()
    {
-      return nodes;
+      return rootNode.isNodesLoaded();
    }
 
-   public void setNodes(List<Node> nodes)
-   {
-      this.nodes = new ArrayList<Node>(nodes);
-   }
-
-   public void addNodes(List<Node> nodes)
-   {
-      this.nodes.addAll(nodes);
-   }
-
+   @Override
    public void addNode(Node node)
    {
-      this.nodes.add(node);
+      rootNode.addNode(node);
    }
 
-   public Node removeNode(String name)
+   @Override
+   public Node getNode(String name)
    {
-      Node found = null;
-      for (Node node : nodes)
+      return rootNode.getNode(name);
+   }
+
+   @Override
+   public boolean removeNode(String name)
+   {
+      return rootNode.removeNode(name);
+   }
+
+   @Override
+   public List<Node> getNodes()
+   {
+      return rootNode.getNodes();
+   }
+
+   public Node getRootNode()
+   {
+      return rootNode;
+   }
+
+   private static class RootNode extends Node
+   {
+      public RootNode()
       {
-         if (node.getName().equals(name))
-         {
-            found = node;
-         }
+         super(ROOT_NAME);
       }
 
-      nodes.remove(found);
-      return found;
+      @Override
+      public void setIconName(String iconName)
+      {
+         throw new ApiException("Can't set icon name on root node");
+      }
+
+      @Override
+      public void setLabel(Label label)
+      {
+         throw new ApiException("Can't set icon name on root node");
+      }
+
+      @Override
+      public void setPageId(PageId pageId)
+      {
+         throw new ApiException("Can't set icon name on root node");
+      }
+
+      @Override
+      public void setVisibility(boolean visible)
+      {
+         throw new ApiException("Can't set visibility on root node");
+      }
+
+      @Override
+      public void setVisibility(PublicationDate publicationDate)
+      {
+         throw new ApiException("Can't set visibility on root node");
+      }
+
+      @Override
+      public void setVisibility(Visibility visibility)
+      {
+         throw new ApiException("Can't set visibility on root node");
+      }
    }
 }
