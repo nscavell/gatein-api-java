@@ -44,7 +44,7 @@ public class Navigation implements NodeContainer, Serializable
 
       this.siteId = siteId;
       this.priority = priority;
-      this.rootNode = Node.rootNode();
+      this.rootNode = Node.rootNode(siteId);
    }
 
    public SiteId getSiteId()
@@ -90,5 +90,10 @@ public class Navigation implements NodeContainer, Serializable
    public List<Node> getNodes()
    {
       return rootNode.getNodes();
+   }
+
+   Node getRootNode()
+   {
+      return rootNode;
    }
 }

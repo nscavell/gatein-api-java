@@ -26,6 +26,7 @@ import org.gatein.api.ApiException;
 import org.gatein.api.internal.Objects;
 import org.gatein.api.portal.Label;
 import org.gatein.api.portal.page.PageId;
+import org.gatein.api.portal.site.SiteId;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -37,11 +38,9 @@ import java.util.List;
  */
 public class Node implements NodeContainer, Serializable
 {
-   private static final Node ROOT_NODE = new RootNode();
-
-   public static Node rootNode()
+   public static Node rootNode(SiteId siteId)
    {
-      return ROOT_NODE;
+      return new RootNode(siteId);
    }
 
    private final String name;
@@ -124,12 +123,17 @@ public class Node implements NodeContainer, Serializable
 
    public NodePath getNodePath()
    {
-      NodePath path = new NodePath(name);
+      NodePath path = name != null ? new NodePath(name) : new NodePath();
       if (parent != null)
       {
          path = parent.getNodePath().append(path);
       }
       return path;
+   }
+
+   public SiteId getSiteId()
+   {
+      return parent != null ? parent.getSiteId() : null;
    }
 
    public URI getURI()
@@ -305,6 +309,19 @@ public class Node implements NodeContainer, Serializable
 
    private static final class RootNode extends Node
    {
+      private SiteId siteId;
+
+      public RootNode(SiteId siteId)
+      {
+         this.siteId = siteId;
+      }
+
+      @Override
+      public SiteId getSiteId()
+      {
+         return siteId;
+      }
+
       @Override
       public void setLabel(Label label)
       {
